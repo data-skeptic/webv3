@@ -1,0 +1,8 @@
+#main-footer{padding: 2.5rem 0;text-align:center;color:rgba(255,255,255,.5);}
+#main-footer li+li{margin-top:0.5rem;}
+#main-footer .lead{color:#f0d943;}
+#main-footer a{color:rgba(255,255,255,.5);}
+#main-footer a:hover,
+#main-footer a:active,
+#main-footer a:focus{color:rgba(255,255,255,.35);text-decoration:none;}
+.no-gutters{padding-right:0;padding-left:0;}

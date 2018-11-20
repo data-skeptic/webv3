@@ -1,0 +1,4 @@
+.login-card{padding:1rem;}
+.login-card .login-icon>img{width:86px;height:86px;}
+.login-card #inputEmail{border-bottom-right-radius:0;border-bottom-left-radius:0;}
+.login-card #inputPassword{border-top-right-radius:0;border-top-left-radius:0;border-top:0;}

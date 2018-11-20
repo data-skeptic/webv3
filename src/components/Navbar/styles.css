@@ -1,0 +1,6 @@
+#main-nav.navbar{padding:2rem 1rem;margin-bottom:1rem;}
+#main-nav .nav-item{transition:border 0.5s;border-top:0;border-right:0;border-bottom:5px;border-left:0;border-style:solid;border-color:transparent;}
+#main-nav .nav-item:hover,
+#main-nav .nav-item:focus,
+#main-nav .nav-item:active,
+#main-nav .nav-item.active{border-color:#f0d943;}
