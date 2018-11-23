@@ -39,7 +39,7 @@ class Corporate extends Component {
           	For consulting inquiries, please email <a href="mailto:kyle@dataskeptic.com">kyle@dataskeptic.com</a>.
           </p>
           <p>
-          	For advertising inquiries, please email <a href="mailto:linhda@dataskeptic.com">linhda@dataskeptic.com</a>.
+          	For advertising inquiries, please email <a href="mailto:alex.evans@dataskeptic.com">alex.evans@dataskeptic.com</a>.
           </p>
           <p>
           	For conferences and other appearances, please email <a href="mailto:events@dataskeptic.com">events@dataskeptic.com</a>.
