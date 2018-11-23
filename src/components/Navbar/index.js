@@ -13,6 +13,7 @@ const Navbar = props => {
     Blog: '/blog',
     Store: '/store',
     Membership: '/membership',
+    Corporate: '/corporate',
   };
   return (
     <nav id="main-nav" className="navbar navbar-expand-lg navbar-dark bg-dark">

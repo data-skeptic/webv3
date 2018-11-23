@@ -25,6 +25,7 @@ const Router = () => {
           <Route path="/blog" component={Views.Blog} />
           <Route path="/store" component={Views.Store} />
           <Route path="/membership" component={Views.Membership} />
+          <Route path="/corporate" component={Views.Corporate} />
           <Route path="/login" component={Views.Login} />
           <Route component={Views.Missing} />
         </Switch>
