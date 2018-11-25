@@ -44,11 +44,9 @@ class Corporate extends Component {
           <p>
           	For conferences and other appearances, please email <a href="mailto:events@dataskeptic.com">events@dataskeptic.com</a>.
           </p>
+          <br/>
           <h3>Careers</h3>
-          <p>
-          	To apply, send your resume to <a href="mailto:careers@dataskeptic.com">careers@dataskeptic.com</a> 	
-          	with a message about why you are applying.
-          </p>
+          <br/>
           <div className="row">
           	<div className="col-xs-12 col-sm-6">
           		<h4>Data Engineer</h4>
@@ -92,6 +90,14 @@ class Corporate extends Component {
           		</p>
           	</div>
           </div>
+          <br/>
+          <p>
+            <center><b>To apply, send your resume to <a href="mailto:careers@dataskeptic.com">careers@dataskeptic.com</a> <br/>with a message about why you are applying.</b></center>
+          </p>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
         </main>
         <Footer />
       </React.Fragment>

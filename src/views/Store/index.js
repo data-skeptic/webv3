@@ -27,7 +27,9 @@ class Store extends Component {
       <React.Fragment>
         <Navbar active={this.constructor.name} />
         <main className="container">
-          Store
+          <h2>Store</h2>
+          <p>We've temporarily taken our store offline while we migrate to our new backend.
+          Please check back in 2019 for new t-shirt designs and our hex stickers.</p>
         </main>
         <Footer />
       </React.Fragment>
