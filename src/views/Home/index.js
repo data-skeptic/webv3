@@ -30,7 +30,7 @@ class Home extends Component {
   render() {
     const { api, status } = this.props || {};
     const { blogs } = api || {};
-    const sorted_blogs = Object.values(blogs).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
+    const sorted_blogs = Object.values(blogs || {}).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
     return (
       <React.Fragment>
         <Navbar active="Bot" />
