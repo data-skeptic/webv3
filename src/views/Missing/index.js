@@ -29,11 +29,11 @@ class Missing extends Component {
       <React.Fragment>
         <Navbar active={this.constructor.name} />
         <main className="container">
-          <div className="row" style={{
-            marginTop: '100px',
-            marginBottom: '100px'
-          }}>
-            <div className="col-sm-6 col-offset-sm-3">
+          <div id="Missing" className="row">
+            <div className="DazedBot col-xs-12 col-sm-3 offset-sm-1">
+              <embed src="https://s3.amazonaws.com/dataskeptic.com/animations/bot/dazed/demo.html" />
+            </div>
+            <div className="MissingContent col-xs-12 col-sm-6">
               <h3>404 - PAGE NOT FOUND</h3>
               <p className="lead">The page you are looking for might have been removed, had its name changed or is temporarily unavailable.</p>
             </div>
