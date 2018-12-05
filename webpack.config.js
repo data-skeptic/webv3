@@ -1,4 +1,7 @@
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -21,8 +24,35 @@ module.exports = {
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' },
+      { test: /\.scss$/, use: ExtractTextPlugin.extract({ fallback: "style-loader", use: "css-loader!sass-loader" }) },
       { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
       { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
     ],
   },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        uglifyOptions: {
+          compress: true,
+          ecma: 6,
+          mangle: true
+        },
+        sourceMap: true
+      })
+    ],
+  },
+  resolve: {
+    alias: {
+      'Api': path.resolve(__dirname, 'src/api'),
+      'Components': path.resolve(__dirname, 'src/components'),
+      'Src': path.resolve(__dirname, 'src'),
+      'Views': path.resolve(__dirname, 'src/views'),
+    }
+  },
+  plugins: [
+    new ExtractTextPlugin('styles.bundle.css'),
+    new OptimizeCssAssetsPlugin(),
+  ]
 };

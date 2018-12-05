@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import './styles.css';
+import './styles.scss';
 
 const Navbar = props => {
+  const { api } = props;
+  const { account } = api;
   const links = {
     Bot: '/',
     Podcast: '/podcast',
@@ -33,7 +36,7 @@ const Navbar = props => {
             ))}
           </ul>
           <ul className="navbar-nav mr-sm-2">
-            {!props.account.email && (
+            {(!account || !account.email) && (
               <li className={`nav-item${props.active === 'Login' ? ' active' : ''}`}>
                 <Link className="nav-link" to="/login">Login</Link>
               </li>
@@ -54,6 +57,6 @@ const Navbar = props => {
 }
 
 export default connect(state => ({
+  api: state.api,
   status: state.status,
-  account: state.account,
 }))(Navbar);
