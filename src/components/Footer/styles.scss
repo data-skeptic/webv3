@@ -1,0 +1,10 @@
+#main-footer{
+  margin-top:1rem;padding: 2.5rem 0;text-align:center;color:rgba(255,255,255,.5);
+  li+li{margin-top:0.5rem;}
+  .lead{color:#f0d943;}
+  a{color:rgba(255,255,255,.5);}
+  a:hover,
+  a:active,
+  a:focus{color:rgba(255,255,255,.35);text-decoration:none;}
+  .no-gutters{padding-right:0;padding-left:0;}
+}

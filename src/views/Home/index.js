@@ -9,10 +9,9 @@ import Loading from 'Components/Loading';
 import Navbar from 'Components/Navbar';
 import Footer from 'Components/Footer';
 
-import BlogPost from './BlogPost';
-import BlogCard from './BlogCard';
+import BlogCard from 'Views/Blog/BlogCard';
 
-class Blog extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
   }
@@ -30,21 +29,21 @@ class Blog extends Component {
   }
   render() {
     const { api, status } = this.props || {};
-    const { blog_id } = this.props.match.params;
     const { blogs } = api || {};
     const sorted_blogs = Object.values(blogs).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
     return (
       <React.Fragment>
-        <Navbar active={this.constructor.name} />
-        <main id="Blog" className="container">
+        <Navbar active="Bot" />
+        <main className="container">
+          <div className="jumbotron">
+            <h1>Welcome</h1>
+            <p className="lead">To Data Skeptic's new layout!</p>
+          </div>
+          <h2>Recent Blogs</h2>
           <Loading on={status.ready}>
-            {blog_id && (
-              <BlogPost post={blogs[blog_id]} />
-            ) || (
-              <div className="card-columns open-gutter">
-                {sorted_blogs.map((blog, b) => <BlogCard post={blog} key={b} />)}
-              </div>
-            )}
+            <div className="card-columns open-gutter">
+              {sorted_blogs.map((blog, b) => b < 3 ? <BlogCard post={blog} key={b} /> : null)}
+            </div>
           </Loading>
         </main>
         <Footer />
@@ -55,5 +54,5 @@ class Blog extends Component {
 
 export default connect(state => ({
   api: state.api,
-  status: state.status
-}))(Blog);
+  status: state.status,
+}))(Home);
