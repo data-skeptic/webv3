@@ -2,4 +2,7 @@
   .Loading,
   .card{min-height:250px}
   .Loading{line-height:250px;}
+  .contributor{float:right;width:2.5rem;border:2px solid #fff;box-shadow:0 0 4px 2px rgba(0,0,0,0.25);border-radius:50%;transform:scale(1);transform-origin:50%;transition:0.25s ease;}
+  .contributor+.contributor{margin-right:0.5rem;}
+  .contributor:hover{transform:scale(1.5);}
 }
