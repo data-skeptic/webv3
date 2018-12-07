@@ -29,8 +29,8 @@ bower_components
 # node-waf configuration
 .lock-wscript
 
-# Webpack Build
-build
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
 
 # Dependency directories
 node_modules/
@@ -59,3 +59,8 @@ typings/
 
 # next.js build output
 .next
+
+# Webpack build files.
+build/index.bundle.js
+build/styles.bundle.css
+build/*.*
