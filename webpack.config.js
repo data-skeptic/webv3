@@ -9,7 +9,7 @@ let ExposedSettings = {
   process: {
     env: {
       NODE_ENV: `"${process.env.NODE_ENV || 'prod'}"`,
-      DATASKEPTIC_API_URI: `"${process.env.DATASKEPTIC_API_URI || `https://4sevcujref.execute-api.us-east-1.amazonaws.com/${env.NODE_ENV}`}"`,
+      DATASKEPTIC_API_URI: `"${process.env.DATASKEPTIC_API_URI || `https://4sevcujref.execute-api.us-east-1.amazonaws.com/${process.env.NODE_ENV || 'prod'}`}"`,
       BOT_SERVICE_API_URI: `"${process.env.BOT_SERVICE_API_URI || 'https://data-skeptic-bot-service-dev.herokuapp.com'}"`
     }
   }
