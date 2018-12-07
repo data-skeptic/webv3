@@ -40,9 +40,9 @@ class BubbleBot extends Component {
     const { style } = this.props;
     const { open } = this.state;
     return (
-      <div className="BubbleBot" style={style || {}}>
-        <div className={`bubble${open ? ' open' : ''}`} onClick={this.handleEvent('ON_CLICK', { name: 'bubble' })}></div>
-        {open && <ChatBot />}
+      <div className={`BubbleBot${open ? ' open' : ''}`} style={style || {}}>
+        <div className="bubble" onClick={this.handleEvent('ON_CLICK', { name: 'bubble' })}></div>
+        <ChatBot />
       </div>
     );
   }
