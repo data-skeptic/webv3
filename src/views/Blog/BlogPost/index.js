@@ -17,11 +17,11 @@ class BlogPost extends Component {
     dispatch({ type: 'API:GET_BLOG', payload: { post }})
   }
   render() {
-    const { api, post } = this.props;
+    const { api, status, post } = this.props;
     const { blogs } = api || {};
     const { blog_id, src } = post;
     return (
-      <Loading on={blogs[blog_id]}>
+      <Loading on={status.loaded.includes(`GET_BLOG_${blog_id}`)}>
         <article className="BlogPost" dangerouslySetInnerHTML={{ __html: src }} />
       </Loading>
     );
