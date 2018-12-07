@@ -8,9 +8,15 @@ import { store, persistor } from './reducer';
 // Router
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+// STYLE LIBRARIES
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'font-awesome/css/font-awesome.min.css';
+
+import './styles.scss';
+
 // Views
 import Views from './views';
-import './styles.scss';
 
 const Router = () => {
   return (

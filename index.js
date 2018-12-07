@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const routes = require('./routes');
 
-const host = !process.env.NODE_ENV || process.env.NODE_ENV === 'dev' ? 'localhost:5000' : 'data-skeptic.com';
+const host = !process.env.NODE_ENV || process.env.NODE_ENV === 'dev' ? 'localhost:5000' : 'dataskeptic.com';
 const port = process.env.PORT || 5000;
 const bodyParser = require('body-parser');
 

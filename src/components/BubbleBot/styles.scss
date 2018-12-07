@@ -1,0 +1,15 @@
+$bubbleColor: #343a40;
+$bubbleBorder: #fff;
+$bubbleImage: '/img/bot.png';
+$arrowColor: #f7f7f7;
+
+.BubbleBot{
+  position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;
+  .bubble{position:absolute;bottom:2rem;right:2rem;width:75px;height:75px;border-radius:50%;background:$bubbleColor url($bubbleImage);background-repeat:no-repeat;background-size:70%;background-position:50%;border:1px solid $bubbleBorder;box-shadow:2px 2px 8px 4px rgba(0,0,0,.25);pointer-events:all;cursor:pointer;z-index:1;transition:0.25s;}
+  .bubble:hover,
+  .bubble:active,
+  .bubble:focus{transform:scale(1.15);}
+  .bubble.open{transform:scale(1.15) rotate(25deg);}
+  .ChatBot{position:absolute;width:400px;height:500px;bottom:125px;right:25px;border-radius:8px;pointer-events:all;box-shadow:2px 2px 8px 2px rgba(0,0,0,.15);}
+  .ChatBot:after{content:'';position:absolute;bottom:0;left:68%;width:0;height:0;border:46px solid transparent;border-top-color:$arrowColor;border-bottom:0;border-right:0;margin-left:-18px;margin-bottom:-46px;}
+}

@@ -1,7 +1,19 @@
+var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'dev') require('dotenv').load();
+let ExposedSettings = {
+  process: {
+    env: {
+      NODE_ENV: `"${process.env.NODE_ENV || 'prod'}"`,
+      DATASKEPTIC_API_URI: `"${process.env.DATASKEPTIC_API_URI || `https://4sevcujref.execute-api.us-east-1.amazonaws.com/${env.NODE_ENV}`}"`,
+      BOT_SERVICE_API_URI: `"${process.env.BOT_SERVICE_API_URI || 'https://data-skeptic-bot-service-dev.herokuapp.com'}"`
+    }
+  }
+};
 
 module.exports = {
   entry: './src/index.js',
@@ -52,6 +64,7 @@ module.exports = {
     }
   },
   plugins: [
+    new webpack.DefinePlugin(ExposedSettings),
     new ExtractTextPlugin('styles.bundle.css'),
     new OptimizeCssAssetsPlugin(),
   ]

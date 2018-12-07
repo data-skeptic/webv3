@@ -8,6 +8,7 @@ import './styles.scss';
 import Loading from 'Components/Loading';
 import Navbar from 'Components/Navbar';
 import Footer from 'Components/Footer';
+import BubbleBot from 'Components/BubbleBot';
 
 import BlogPost from './BlogPost';
 import BlogCard from './BlogCard';
@@ -48,6 +49,7 @@ class Blog extends Component {
           </Loading>
         </main>
         <Footer />
+        <BubbleBot />
       </React.Fragment>
     );
   }

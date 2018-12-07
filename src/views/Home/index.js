@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css';
 import './styles.scss';
 
 import Loading from 'Components/Loading';
 import Navbar from 'Components/Navbar';
 import Footer from 'Components/Footer';
+import ChatBot from 'Components/ChatBot';
 
 import BlogCard from 'Views/Blog/BlogCard';
-
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      log: []
+    };
   }
   componentDidMount() {
     let { dispatch } = this.props;
@@ -31,20 +32,16 @@ class Home extends Component {
     const { api, status } = this.props || {};
     const { blogs } = api || {};
     const sorted_blogs = Object.values(blogs || {}).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
+    const { log } = this.state;
     return (
       <React.Fragment>
         <Navbar active="Bot" />
-        <main className="container">
-          <div className="jumbotron">
-            <h1>Welcome</h1>
-            <p className="lead">To Data Skeptic's new layout!</p>
-          </div>
-          <h2>Recent Blogs</h2>
-          <Loading on={status.ready}>
-            <div className="card-columns open-gutter">
-              {sorted_blogs.map((blog, b) => b < 3 ? <BlogCard post={blog} key={b} /> : null)}
+        <main className="Home container">
+          <div className="row">
+            <div className="col-xs-12 col-sm-6">
+              <ChatBot />
             </div>
-          </Loading>
+          </div>
         </main>
         <Footer />
       </React.Fragment>
