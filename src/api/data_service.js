@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URI = 'https://4sevcujref.execute-api.us-east-1.amazonaws.com/prod';
+const DATASKEPTIC_API_URI = process.env.DATASKEPTIC_API_URI;
+console.log(DATASKEPTIC_API_URI);
 /*
   Basic Data Service setup.
   Setup as a 'middleware' for Redux, this functions identically to a Reducer, and is given actions
@@ -19,7 +20,7 @@ const data_service = store => next => action => {
     case 'API:GET_BLOGS':
       const { limit, offset } = data;
       next({ type: 'STATUS:LOADING', payload: 'GET_BLOGS' });
-      axios.get(`${API_URI}/blog/list?limit=${limit || 10}&offset=${offset || 0}&prefix=`)
+      axios.get(`${DATASKEPTIC_API_URI}/blog/list?limit=${limit || 10}&offset=${offset || 0}&prefix=`)
         .then(({ data }) => {
           let blogs = {};
           data.map(blog => {
