@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css';
 import './styles.scss';
 
 import Loading from 'Components/Loading';
@@ -18,6 +16,7 @@ class BlogPost extends Component {
   }
   componentDidMount() {
     const { post } = this.props;
+    post.related = post.related || [];
     post.related.map(content => {
       if (content.type === 'homepage-image') {
         this.image = new Image();
@@ -26,7 +25,7 @@ class BlogPost extends Component {
         }
         this.image.src = content.dest;
       }
-    })
+    });
     if (!this.image) this.setState({ loaded: true });
   }
   handleEvent(event_name, event_data = {}) {
@@ -57,6 +56,7 @@ class BlogPost extends Component {
               <h5 className="card-title">{title}</h5>
               <p className="card-text">{abstract}</p>
               <Link to={`/blog/${blog_id}`} className="btn btn-primary">Read More</Link>
+              {post.contributors && post.contributors.map((contributor, c) => <img className="contributor" src={contributor.img} title={`${contributor.prettyname}: ${contributor.contribution}`} alt={contributor.prettyname} key={c} />)}
             </div>
             <div className="card-footer">
               <small className="text-muted">Posted {date}</small>
