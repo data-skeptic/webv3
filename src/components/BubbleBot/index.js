@@ -8,7 +8,7 @@ class BubbleBot extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      open: props.open || false,
     };
   }
   componentDidMount() {
@@ -42,7 +42,7 @@ class BubbleBot extends Component {
     return (
       <div className={`BubbleBot${open ? ' open' : ''}`} style={style || {}}>
         <div className="bubble" onClick={this.handleEvent('ON_CLICK', { name: 'bubble' })}></div>
-        <ChatBot />
+        <ChatBot bot_id="18a5cb19-7c2f-bdc8-3fc3-81532d39f162" />
       </div>
     );
   }

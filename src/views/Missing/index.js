@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css';
 import './styles.scss';
 
 import Navbar from 'Components/Navbar';
 import Footer from 'Components/Footer';
+import BubbleBot from 'Components/BubbleBot';
 
 class Missing extends Component {
   constructor(props) {
@@ -40,6 +39,7 @@ class Missing extends Component {
           </div>
         </main>
         <Footer />
+        <BubbleBot open />
       </React.Fragment>
     );
   }
