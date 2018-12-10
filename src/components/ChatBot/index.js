@@ -16,7 +16,7 @@ class ChatBot extends Component {
       awaiting_response: false,
       bot: {},
       username: 'Guest',
-      bot_id: 'f06d0f04-02a2-560d-9c0c-2220f96ec56f'
+      bot_id: props.bot_id || 'f06d0f04-02a2-560d-9c0c-2220f96ec56f',
     };
     this.chat = React.createRef();
     this.footer = React.createRef();
@@ -156,7 +156,7 @@ class ChatBot extends Component {
           this.io.emit('USER', {source: username, bot_id, text: message});
           // message = { res: [{ text: message }], source: this.username };
           // this.handleEvent('RENDER_MESSAGE', this.username)(message);
-          this.footer.current.getElementsByClassName('sc-input')[0].focus();
+          this.footer.current.getElementsByTagName('input')[0].focus();
         };
       case 'ON_CHANGE':
         return event => {
