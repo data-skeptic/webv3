@@ -35,6 +35,7 @@ class Home extends Component {
     const { log } = this.state;
     return (
       <React.Fragment>
+        <title>DataSkeptic</title>
         <Navbar active="Bot" />
         <main className="Home container">
           <div className="row">

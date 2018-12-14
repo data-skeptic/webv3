@@ -26,7 +26,7 @@ class ChatBot extends Component {
     const { username, bot_id } = this.state;
     let session = JSON.parse(sessionStorage.getItem('CHATBOT') || '{}');
 
-    dispatch({ type: 'STATUS:LOADING', payload: 'tutor_bot' });
+    dispatch({ type: 'STATUS:LOADING', payload: 'skeptic_bot' });
     this.io = Skeptic.Client({
       connect: process.env.BOT_SERVICE_API_URI,
       events: {
@@ -40,10 +40,8 @@ class ChatBot extends Component {
                   session[key] = message.set[key];
                 });
                 sessionStorage.setItem('CHATBOT', JSON.stringify(session));
-                console.log({ session });
                 break;
               default:
-                console.log(message);
                 break;
             }
           })
@@ -63,7 +61,7 @@ class ChatBot extends Component {
     const user_id = session.user_id || null;
     this.setState({ user_id });
     this.handleEvent('GREET_BOT')();
-    dispatch({ type: 'STATUS:LOADED', payload: 'tutor_bot' });
+    dispatch({ type: 'STATUS:LOADED', payload: 'skeptic_bot' });
     setInterval(() => {
       this.setState({ typing: this.state.typing < 3 ? this.state.typing + 1 : 0 });
     }, 750);
@@ -75,8 +73,7 @@ class ChatBot extends Component {
     switch (event_name) {
       case 'GREET_BOT':
         return () => {
-          if (status.loading.includes('tutor_bot')) return setTimeout(this.handleEvent('GREET_BOT'), 1000);
-          console.log('Greeting TutorBot...');
+          if (status.loading.includes('skeptic_bot')) return setTimeout(this.handleEvent('GREET_BOT'), 1000);
           this.io.emit('CONNECTION', { bot_id: bot_id, username: username, user_id: user_id });
         };
 	    case 'RENDER_MESSAGE':

@@ -63,4 +63,5 @@ typings/
 # Webpack build files.
 build/index.bundle.js
 build/styles.bundle.css
+build/index.html
 build/*.*
