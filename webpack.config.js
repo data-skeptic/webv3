@@ -7,7 +7,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') require('dotenv').load();
 let ExposedSettings = {
-  test: 123,
   process: {
     env: {
       NODE_ENV: `"${process.env.NODE_ENV || 'production'}"`,
@@ -28,12 +27,12 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './build',
-    port: 5001,
+    port: (process.env.PORT + 1),
     historyApiFallback: {
       index: 'index.html'
     },
     proxy: {
-      '/api': 'http://localhost:5000'
+      '/api': `http://localhost:${process.env.PORT}`
     }
   },
   module: {
