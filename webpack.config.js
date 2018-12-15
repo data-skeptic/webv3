@@ -27,7 +27,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './build',
-    port: (process.env.PORT + 1),
+    port: (parseInt(process.env.PORT) + 1),
     historyApiFallback: {
       index: 'index.html'
     },
