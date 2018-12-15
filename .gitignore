@@ -61,7 +61,12 @@ typings/
 .next
 
 # Webpack build files.
-build/index.bundle.js
+build/main.bundle.js
 build/styles.bundle.css
 build/index.html
-build/*.*
+build/*.eot
+build/*.svg
+build/*.ttf
+build/vendor*
+
+amplify
