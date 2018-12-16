@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactJson from 'react-json-view';
 
 import './styles.scss';
 
 import Navbar from 'Components/Navbar';
 import Footer from 'Components/Footer';
-import BubbleBot from 'Components/BubbleBot';
+import Error from 'Components/Error';
 
-class Missing extends Component {
+class Problem extends Component {
   constructor(props) {
     super(props);
   }
@@ -24,22 +25,16 @@ class Missing extends Component {
     }
   }
   render() {
+    const { location, error, info } = this.props;
+    const name = JSON.stringify(error.name).replace(/"/g, '');
+    const message = JSON.stringify(error.message);
     return (
       <React.Fragment>
         <Navbar active={this.constructor.name} />
-        <main id="Missing" className="container">
-          <div className="row">
-            <div className="DazedBot col-xs-12 col-sm-3 offset-sm-1">
-              <embed src="https://s3.amazonaws.com/dataskeptic.com/animations/bot/dazed/demo.html" />
-            </div>
-            <div className="MissingContent col-xs-12 col-sm-6">
-              <h3>404 - PAGE NOT FOUND</h3>
-              <p className="lead">The page you are looking for might have been removed, had its name changed or is temporarily unavailable.</p>
-            </div>
-          </div>
+        <main id="Problem" className="container">
+          <Error className="row" error={error} info={info} {...this.props} />
         </main>
         <Footer />
-        <BubbleBot open />
       </React.Fragment>
     );
   }
@@ -47,4 +42,4 @@ class Missing extends Component {
 
 export default connect(state => ({
   status: state.status
-}))(Missing);
+}))(Problem);

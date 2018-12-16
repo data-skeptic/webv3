@@ -14,7 +14,7 @@ class Podcast extends Component {
   }
   componentDidMount() {
     let { dispatch } = this.props;
-    dispatch({ type: 'STATUS:READY' });
+    dispatch({ type: 'API:GET_PODCASTS' });
   }
   handleEvent(event_name, event_data = {}) {
     switch (event_name) {

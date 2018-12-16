@@ -3,10 +3,13 @@ import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+import { ReactGA as analytics } from 'react-ga';
 import api, { data_service } from './api';
 import { NotificationsReducer as notifications } from './components/Notifications';
 
-const rootReducer = (nextState = {}, action) => {
+const initialState = {};
+
+const rootReducer = (nextState = initialState, action) => {
   let state = Object.assign({}, nextState);
   switch(action.type) {
     case "persist/REHYDRATE":

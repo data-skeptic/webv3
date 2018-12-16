@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css';
 import './styles.scss';
 
 import Loading from 'Components/Loading';
@@ -12,13 +10,15 @@ import BubbleBot from 'Components/BubbleBot';
 
 import BlogPost from './BlogPost';
 import BlogCard from './BlogCard';
+import { Analytics } from 'aws-amplify';
 
 class Blog extends Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    let { dispatch } = this.props;
+    const { api, dispatch } = this.props;
+    const { analytics } = api;
     dispatch({ type: 'API:GET_BLOGS' });
   }
   handleEvent(event_name, event_data = {}) {

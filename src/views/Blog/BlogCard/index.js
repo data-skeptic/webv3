@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import moment from 'moment';
 
 import './styles.scss';
 
 import Loading from 'Components/Loading';
 
-class BlogPost extends Component {
+class BlogCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,4 +72,4 @@ class BlogPost extends Component {
 export default connect(state => ({
   api: state.api,
   status: state.status
-}))(BlogPost);
+}))(BlogCard);

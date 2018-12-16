@@ -29,10 +29,10 @@ class Corporate extends Component {
         <main className="container">
           <h2>Data Skeptic LLC</h2>
           <p>
-            In addition to producing the most popular data science podcast on iTunes, Stitcher, Pandora, 
-            Spotify, and other outlets, we are also a boutique consulting company.  Data Skeptic helps 
-            small and medium enterprise organizations level up their data science through custom solution 
-            development, team building, and training.  If you have a problem, if no one else can help, 
+            In addition to producing the most popular data science podcast on iTunes, Stitcher, Pandora,
+            Spotify, and other outlets, we are also a boutique consulting company.  Data Skeptic helps
+            small and medium enterprise organizations level up their data science through custom solution
+            development, team building, and training.  If you have a problem, if no one else can help,
             and if you can find us, maybe you can hire Data Skeptic.
           </p>
           <p>
