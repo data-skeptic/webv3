@@ -12,7 +12,8 @@ let ExposedSettings = {
       NODE_ENV: `"${process.env.NODE_ENV || 'production'}"`,
       DATASKEPTIC_API_URI: `"${process.env.DATASKEPTIC_API_URI || `https://4sevcujref.execute-api.us-east-1.amazonaws.com/prod`}"`,
       BOT_SERVICE_API_URI: `"${process.env.BOT_SERVICE_API_URI || 'https://data-skeptic-bot-service-dev.herokuapp.com'}"`,
-      GA_TRACKING_ID: `"${process.env.GA_TRACKING_ID || ''}"`
+      GA_TRACKING_ID: `"${process.env.GA_TRACKING_ID || ''}"`,
+      SHOW_ERRORS: `${process.env.SHOW_ERRORS}`
     }
   }
 };

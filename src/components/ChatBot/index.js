@@ -62,9 +62,12 @@ class ChatBot extends Component {
     this.setState({ user_id });
     this.handleEvent('GREET_BOT')();
     dispatch({ type: 'STATUS:LOADED', payload: 'skeptic_bot' });
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.setState({ typing: this.state.typing < 3 ? this.state.typing + 1 : 0 });
     }, 750);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
   handleEvent(event_name, event_data = {}) {
     const { api, status, dispatch } = this.props;
