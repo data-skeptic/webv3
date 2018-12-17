@@ -21,9 +21,17 @@ const data_service = store => next => action => {
       next({ type: 'STATUS:LOADING', payload: 'GET_BLOGS' });
       axios.get(`${DATASKEPTIC_API_URI}/blog/list?limit=${limit || 10}&offset=${offset || 0}&prefix=`)
         .then(({ data }) => {
-          var blogs = {};
+          var blogs = {
+            all: Object.values(data).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1)),
+          };
           data.map(blog => {
-            blogs[blog.blog_id] = blog;
+            var path = blog.prettyname.substr(1,).split('/');
+            blog.category = path[0];
+            blog.year = path[1];
+            blog.name = path[2];
+            blogs[blog.category] = blogs[blog.category] || {};
+            blogs[blog.category][blog.year] = blogs[blog.category][blog.year] || {};
+            blogs[blog.category][blog.year][blog.name] = blog;
           });
           next({ type: 'API:UPDATE', payload: { blogs } });
           next({ type: 'STATUS:LOADED', payload: 'GET_BLOGS' });
@@ -38,9 +46,17 @@ const data_service = store => next => action => {
       next({ type: 'STATUS:LOADING', payload: `GET_BLOG_${post.blog_id}` });
       axios.get(`https://s3.amazonaws.com/dataskeptic.com/${post.src_file}`)
         .then(({ data }) => {
-          next({ type: 'API:UPDATE', payload: { blogs: {
-            [post.blog_id]: { src: data }
-          } } });
+          next({
+            type: 'API:UPDATE', payload: {
+              blogs: {
+                [post.category]: {
+                  [post.year]: {
+                    [post.name]: { src: data }
+                  }
+                }
+              }
+            }
+          });
           next({ type: 'STATUS:LOADED', payload: `GET_BLOG_${post.blog_id}` });
         })
         .catch(error => {

@@ -22,6 +22,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
+    publicPath: '/',
     filename: process.env.NODE_ENV === 'development' ? '[name].bundle.js' : '[name].[hash].bundle.js',
   },
   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
@@ -29,9 +30,7 @@ module.exports = {
   devServer: {
     contentBase: './build',
     port: (parseInt(process.env.PORT) + 1),
-    historyApiFallback: {
-      index: 'index.html'
-    },
+    historyApiFallback: true,
     proxy: {
       '/api': `http://localhost:${process.env.PORT}`
     }

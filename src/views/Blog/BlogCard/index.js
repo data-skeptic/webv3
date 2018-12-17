@@ -44,19 +44,18 @@ class BlogCard extends Component {
   }
   render() {
     const { api, post } = this.props;
-    const { blogs } = api || {};
-    const { blog_id, title, abstract, publish_date } = post;
+    const { blog_id, prettyname, title, abstract, publish_date } = post;
     let date = moment(publish_date, "YYYYMMDD").fromNow();
     if (date.includes('month')) date = moment(publish_date).format("MMMM Do YYYY");
     return (
       <article className="BlogCard col">
         <div className="card">
-          <Loading on={this.state.loaded && blogs[blog_id]}>
+          <Loading on={this.state.loaded && post}>
             {this.image && <img className="card-img-top" src={this.image.src} alt={title} />}
             <div className="card-body">
               <h5 className="card-title">{title}</h5>
               <p className="card-text">{abstract}</p>
-              <Link to={`/blog/${blog_id}`} className="btn btn-primary">Read More</Link>
+              <Link to={`/blog${prettyname}`} className="btn btn-primary">Read More</Link>
               {post.contributors && post.contributors.map((contributor, c) => <img className="contributor" src={contributor.img} title={`${contributor.prettyname}: ${contributor.contribution}`} alt={contributor.prettyname} key={c} />)}
             </div>
             <div className="card-footer">
