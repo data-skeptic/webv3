@@ -5,12 +5,6 @@
   .contributor{float:right;width:2.5rem;border:2px solid #fff;box-shadow:0 0 4px 2px rgba(0,0,0,0.25);border-radius:50%;transform:scale(1);transform-origin:50%;transition:0.25s ease;}
   .contributor+.contributor{margin-right:0.5rem;}
   .contributor:hover{transform:scale(1.5);}
-}
-
-.podcast-img-main {
-	max-width: 250px
-}
-
-.podcast-date {
-	font-size: 8pt
+  .podcast-img-main{max-width:250px;max-height:250px;}
+  .podcast-date{font-size:8pt;}
 }

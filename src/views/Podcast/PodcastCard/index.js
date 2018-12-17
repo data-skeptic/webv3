@@ -56,26 +56,20 @@ class PodcastCard extends Component {
       guest image
     */
     return (
-      <article className="PodcastCard col-xs-12">
-        <div className="podcast">
-          <Loading on={this.state.loaded && podcasts[blog_id]}>
-            <div classname="row">
-              <div className="podcast-image col-xs-3">
-                {this.image && <img className="podcast-img-main" src={this.image.src} alt={title} />}
-              </div>
-              <div className="podcast-body col-xs-9">
-                <p className="podcast-date">{date}</p>
-                <h5 className="podcast-title">{title}</h5>
-                <div>
-                  <button>Play</button>
-                  <button>Download</button>
-                </div>
-                <p className="podcast-text">{abstract}</p>
-                <Link to={`/blog/${blog_id}`} className="btn btn-primary">Read More</Link>
-              </div>
+      <article className="PodcastCard row">
+        <Loading on={this.state.loaded && podcasts[blog_id]}>
+          {this.image && <img className="col-xs-12 col-sm-3 podcast-img-main" src={this.image.src} alt={title} />}
+          <div className="podcast-body col-xs-12 col-sm-9">
+            <p className="podcast-date">{date}</p>
+            <h5 className="podcast-title">{title}</h5>
+            <div>
+              <button>Play</button>
+              <button>Download</button>
             </div>
-          </Loading>
-        </div>
+            <p className="podcast-text">{abstract}</p>
+            <Link to={`/blog/${blog_id}`} className="btn btn-primary">Read More</Link>
+          </div>
+        </Loading>
       </article>
     );
   }

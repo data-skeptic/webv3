@@ -43,9 +43,9 @@ class Podcast extends Component {
             {blog_id && (
               <BlogPost post={blogs[blog_id]} />
             ) || (
-              <div className="row open-gutter">
+              <React.Fragment>
                 {sorted_blogs.map((blog, b) => <PodcastCard post={blog} key={b} />)}
-              </div>
+              </React.Fragment>
             )}
           </Loading>
         </main>
