@@ -18,7 +18,6 @@ class Blog extends Component {
   }
   componentDidMount() {
     const { api, dispatch } = this.props;
-    const { analytics } = api;
     dispatch({ type: 'API:GET_BLOGS' });
   }
   handleEvent(event_name, event_data = {}) {
@@ -31,19 +30,21 @@ class Blog extends Component {
   }
   render() {
     const { api, status } = this.props || {};
-    const { blog_id } = this.props.match.params;
-    const { blogs } = api || {};
-    const sorted_blogs = Object.values(blogs || {}).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
+    let { category, year, name } = this.props.match.params;
+    category = category || 'all';
+    const blogs = api.blogs || {};
+    const category_blogs = blogs[category] || [];
+    const post = blogs[category] && blogs[category][year] && blogs[category][year][name] ? blogs[category][year][name] : undefined;
     return (
       <React.Fragment>
         <Navbar active={this.constructor.name} />
         <main id="Blog" className="container">
           <Loading on={status.ready}>
-            {blog_id && (
-              <BlogPost post={blogs[blog_id]} />
+            {post && (
+              <BlogPost post={post} />
             ) || (
               <div className="card-columns open-gutter">
-                {sorted_blogs.map((blog, b) => <BlogCard post={blog} key={b} />)}
+                {category_blogs.map((blog, b) => <BlogCard post={blog} key={b} />)}
               </div>
             )}
           </Loading>

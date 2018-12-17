@@ -27,7 +27,7 @@ const Router = () => {
             <Route exact path="/" component={Views.Home} />
             <Route path="/podcast" component={Views.Podcast} />
             <Route exact path="/blog" component={Views.Blog} />
-            <Route path="/blog/:blog_id" component={Views.Blog} />
+            <Route path="/blog/:category/:year/:name" component={Views.Blog} />
             <Route path="/store" component={Views.Store} />
             <Route path="/membership" component={Views.Membership} />
             <Route path="/corporate" component={Views.Corporate} />
