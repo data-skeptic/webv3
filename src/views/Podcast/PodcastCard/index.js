@@ -64,9 +64,12 @@ class PodcastCard extends Component {
                 {this.image && <img className="podcast-img-main" src={this.image.src} alt={title} />}
               </div>
               <div className="podcast-body col-xs-9">
-              Test
                 <p className="podcast-date">{date}</p>
                 <h5 className="podcast-title">{title}</h5>
+                <div>
+                  <button>Play</button>
+                  <button>Download</button>
+                </div>
                 <p className="podcast-text">{abstract}</p>
                 <Link to={`/blog/${blog_id}`} className="btn btn-primary">Read More</Link>
               </div>
