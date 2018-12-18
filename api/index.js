@@ -1,14 +1,25 @@
 const api = require('express').Router();
 
-// API Gateway
-api.get('*', (req, res, next) => {
-  /*
-    Any time an API is accessed, this route will fire before passing
-    control on to the next handler.
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') require('dotenv').load();
+const expressGa = require('express-ga-middleware')(process.env.GA_TRACKING_ID);
 
-    This can be used for basic API logging and analytics.
-  */
-  console.log('API Access @ ', new Date().getTime());
+// API Gateway
+api.get((req, res, next) => {
+  expressGa.event({
+    category: 'API',
+    action: 'GET',
+    label: req.originalUrl,
+  })(req, res, next);
+  console.log('GET API Access @', new Date().getTime(), req.originalUrl);
+  next();
+});
+api.post((req, res, next) => {
+  expressGa.event({
+    category: 'API',
+    action: 'POST',
+    label: req.originalUrl,
+  })(req, res, next);
+  console.log('GET API Access @', new Date().getTime(), req.originalUrl);
   next();
 });
 
