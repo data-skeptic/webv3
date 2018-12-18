@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes
-app.use('*', routes);
+app.use(routes);
 
 // Static Route
 app.use(express.static(`${__dirname}/build`));
