@@ -41,30 +41,29 @@ class PodcastCard extends Component {
         };
     }
   }
+  onClickPlay(self) {
+    console.log("play")
+  }
+  onClickDownload() {
+    console.log("download")
+  }
   render() {
     const { api, post } = this.props;
     const { podcasts } = api || {};
     const { blog_id, title, abstract, publish_date } = post;
     let date = moment(publish_date, "YYYYMMDD").fromNow();
     if (date.includes('month')) date = moment(publish_date).format("MMMM Do YYYY");
-    /*
-      date
-      title
-      play | download
-      desc
-      read more
-      guest image
-    */
+    console.log(post)
     return (
       <article className="PodcastCard row">
         <Loading on={this.state.loaded && podcasts[blog_id]}>
           {this.image && <img className="col-xs-12 col-sm-3 podcast-img-main" src={this.image.src} alt={title} />}
           <div className="podcast-body col-xs-12 col-sm-9">
             <p className="podcast-date">{date}</p>
-            <h5 className="podcast-title">{title}</h5>
+            <h5 className="podcast-title"><Link to={`/blog/${blog_id}`}>{title}</Link></h5>
             <div>
-              <button>Play</button>
-              <button>Download</button>
+              <button className="play-button" onClick={this.onClickPlay(this)}><span>Play </span></button>
+              <button className="download-button" onClick={this.onClickDownload(this)}><span>Download </span></button>
             </div>
             <p className="podcast-text">{abstract}</p>
             <Link to={`/blog/${blog_id}`} className="btn btn-primary">Read More</Link>
