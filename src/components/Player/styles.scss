@@ -12,9 +12,9 @@ $trackColor:rgba(0,0,0,0.15);
     label{margin-left:5%;width:25%;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
   }
   .player-control{border-radius:50%!important;}
-  .player-art{max-width:65px;max-height:65px;margin:-7.5px 0;}
+  .player-art{float:left;max-width:65px;max-height:65px;margin:-7.5px 15px -7.5px 0;}
   .player-info{
-    margin:0 15px 0 -15px;line-height:1.5rem;vertical-align:middle;
+    line-height:1.5rem;vertical-align:middle;
     p{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;font-weight:700;}
     small{display:block;font-style:italic;opacity:0.8;}
   }
