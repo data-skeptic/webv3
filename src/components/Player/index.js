@@ -116,11 +116,11 @@ class Player extends Component {
         <ReactHowler src={src} playing={playing} ref={this.audio} onLoad={this.handleEvent('ON_LOAD')} onEnd={this.handleEvent('ON_END')} />
         <div className="container-fluid">
           <div className="row player-display">
-            <div className="col-sm-1">
-              <img className="player-art thumbnail rounded" src={art} />
-            </div>
-            <div className="col-sm-3 player-info">
-              <p className="mb-0">{title}{subtitle && <small>{subtitle}</small>}</p>
+            <div className="col-sm-4">
+              <div className="player-info">
+                <img className="player-art thumbnail rounded" src={art} />
+                <p className="mb-0">{title}{subtitle && <small>{subtitle}</small>}</p>
+              </div>
             </div>
             {ready && (
               <div className="col-sm-5 player-progress">
