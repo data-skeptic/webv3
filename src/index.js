@@ -18,22 +18,32 @@ import './styles.scss';
 // Views
 import Views from './views';
 
+// Components
+import Navbar from 'Components/Navbar';
+import Player from 'Components/Player';
+import Footer from 'Components/Footer';
+
 const Router = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={Views.Home} />
-            <Route path="/podcast" component={Views.Podcast} />
-            <Route exact path="/blog" component={Views.Blog} />
-            <Route path="/blog/:category/:year/:name" component={Views.Blog} />
-            <Route path="/store" component={Views.Store} />
-            <Route path="/membership" component={Views.Membership} />
-            <Route path="/corporate" component={Views.Corporate} />
-            <Route path="/login" component={Views.Login} />
-            <Route component={Views.Missing} />
-          </Switch>
+          <React.Fragment>
+            <Navbar />
+            <Player />
+            <Switch>
+              <Route exact path="/" component={Views.Home} />
+              <Route path="/podcast" component={Views.Podcast} />
+              <Route exact path="/blog" component={Views.Blog} />
+              <Route path="/blog/:category/:year/:name" component={Views.Blog} />
+              <Route path="/store" component={Views.Store} />
+              <Route path="/membership" component={Views.Membership} />
+              <Route path="/corporate" component={Views.Corporate} />
+              <Route path="/login" component={Views.Login} />
+              <Route component={Views.Missing} />
+            </Switch>
+            <Footer />
+          </React.Fragment>
         </BrowserRouter>
       </PersistGate>
     </Provider>

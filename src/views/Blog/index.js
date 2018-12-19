@@ -4,20 +4,17 @@ import { connect } from 'react-redux';
 import './styles.scss';
 
 import Loading from 'Components/Loading';
-import Navbar from 'Components/Navbar';
-import Footer from 'Components/Footer';
 import BubbleBot from 'Components/BubbleBot';
 
 import BlogPost from './BlogPost';
 import BlogCard from './BlogCard';
-import { Analytics } from 'aws-amplify';
 
 class Blog extends Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    const { api, dispatch } = this.props;
+    const { dispatch, player } = this.props;
     dispatch({ type: 'API:GET_BLOGS' });
   }
   handleEvent(event_name, event_data = {}) {
@@ -37,7 +34,6 @@ class Blog extends Component {
     const post = blogs[category] && blogs[category][year] && blogs[category][year][name] ? blogs[category][year][name] : undefined;
     return (
       <React.Fragment>
-        <Navbar active={this.constructor.name} />
         <main id="Blog" className="container">
           <Loading on={status.ready}>
             {post && (
@@ -49,7 +45,6 @@ class Blog extends Component {
             )}
           </Loading>
         </main>
-        <Footer />
         <BubbleBot />
       </React.Fragment>
     );
@@ -58,5 +53,6 @@ class Blog extends Component {
 
 export default connect(state => ({
   api: state.api,
-  status: state.status
+  status: state.status,
+  player: state.player,
 }))(Blog);

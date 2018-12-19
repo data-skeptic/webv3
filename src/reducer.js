@@ -5,7 +5,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { ReactGA as analytics } from 'react-ga';
 import api, { data_service } from './api';
-import { NotificationsReducer as notifications } from './components/Notifications';
+
+import { NotificationsReducer as notifications } from 'Components/Notifications';
+import { PlayerReducer as player } from 'Components/Player';
 
 const initialState = {};
 
@@ -76,6 +78,7 @@ const reducers = persistCombineReducers(persistConfig, {
   api,
   status,
   notifications,
+  player,
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(data_service)));

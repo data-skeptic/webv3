@@ -36,21 +36,17 @@ class Podcast extends Component {
     const { blog_id } = this.props.match.params;
     const sorted_blogs = Object.values(blogs || {}).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
     return (
-      <React.Fragment>
-        <Navbar active={this.constructor.name} />
-        <main id="Podcast" className="container">
-          <Loading on={status.ready}>
-            {blog_id && (
-              <BlogPost post={blogs[blog_id]} />
-            ) || (
-              <React.Fragment>
-                {sorted_blogs.map((blog, b) => <PodcastCard post={blog} key={b} />)}
-              </React.Fragment>
-            )}
-          </Loading>
-        </main>
-        <Footer />
-      </React.Fragment>
+      <main id="Podcast" className="container">
+        <Loading on={status.ready}>
+          {blog_id && (
+            <BlogPost post={blogs[blog_id]} />
+          ) || (
+            <React.Fragment>
+              {sorted_blogs.map((blog, b) => <PodcastCard post={blog} key={b} />)}
+            </React.Fragment>
+          )}
+        </Loading>
+      </main>
     );
   }
 }

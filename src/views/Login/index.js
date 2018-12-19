@@ -27,13 +27,9 @@ class Login extends Component {
   }
   render() {
     return (
-      <React.Fragment>
-        <Navbar active={this.constructor.name} />
-        <main className="container">
-          <LoginCard />
-        </main>
-        <Footer />
-      </React.Fragment>
+      <main className="container">
+        <LoginCard />
+      </main>
     );
   }
 }

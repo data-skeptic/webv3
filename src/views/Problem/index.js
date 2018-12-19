@@ -29,13 +29,9 @@ class Problem extends Component {
     const name = JSON.stringify(error.name).replace(/"/g, '');
     const message = JSON.stringify(error.message);
     return (
-      <React.Fragment>
-        <Navbar active={this.constructor.name} />
-        <main id="Problem" className="container">
-          <Error className="row" error={error} info={info} {...this.props} />
-        </main>
-        <Footer />
-      </React.Fragment>
+      <main id="Problem" className="container">
+        <Error className="row" error={error} info={info} {...this.props} />
+      </main>
     );
   }
 }
