@@ -26,7 +26,6 @@ class Missing extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar active={this.constructor.name} />
         <main id="Missing" className="container">
           <div className="row">
             <div className="DazedBot col-xs-12 col-sm-3 offset-sm-1">
@@ -38,7 +37,6 @@ class Missing extends Component {
             </div>
           </div>
         </main>
-        <Footer />
         <BubbleBot open />
       </React.Fragment>
     );

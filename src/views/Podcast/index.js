@@ -26,13 +26,9 @@ class Podcast extends Component {
   }
   render() {
     return (
-      <React.Fragment>
-        <Navbar active={this.constructor.name} />
-        <main className="container">
-          Podcast
-        </main>
-        <Footer />
-      </React.Fragment>
+      <main className="container">
+        Podcast
+      </main>
     );
   }
 }

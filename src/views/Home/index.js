@@ -34,18 +34,13 @@ class Home extends Component {
     const sorted_blogs = Object.values(blogs || {}).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
     const { log } = this.state;
     return (
-      <React.Fragment>
-        <title>DataSkeptic</title>
-        <Navbar active="Bot" />
-        <main className="Home container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-6">
-              <ChatBot />
-            </div>
+      <main className="Home container">
+        <div className="row">
+          <div className="col-xs-12 col-sm-6">
+            <ChatBot />
           </div>
-        </main>
-        <Footer />
-      </React.Fragment>
+        </div>
+      </main>
     );
   }
 }
