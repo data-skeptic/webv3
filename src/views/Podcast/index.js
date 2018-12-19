@@ -5,6 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import './styles.scss';
 
+import PodcastCard from './PodcastCard';
+import BlogCard from '../Blog/BlogCard';
+
+import Loading from 'Components/Loading';
+
 import Navbar from 'Components/Navbar';
 import Footer from 'Components/Footer';
 
@@ -25,14 +30,28 @@ class Podcast extends Component {
     }
   }
   render() {
+    const { api, status } = this.props || {};
+    const { podcasts } = api || {};
+    const blogs = podcasts
+    const { blog_id } = this.props.match.params;
+    const sorted_blogs = Object.values(blogs || {}).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
     return (
-      <main className="container">
-        Podcast
+      <main id="Podcast" className="container">
+        <Loading on={status.ready}>
+          {blog_id && (
+            <BlogPost post={blogs[blog_id]} />
+          ) || (
+            <React.Fragment>
+              {sorted_blogs.map((blog, b) => <PodcastCard post={blog} key={b} />)}
+            </React.Fragment>
+          )}
+        </Loading>
       </main>
     );
   }
 }
 
 export default connect(state => ({
+  api: state.api,
   status: state.status
 }))(Podcast);
