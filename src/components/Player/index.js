@@ -49,6 +49,7 @@ class Player extends Component {
     clearInterval(this.updateInterval);
   }
   handleEvent(event_name, event_data = {}) {
+    const { dispatch } = this.props;
     switch(event_name) {
       case 'ON_LOAD':
         return event => {
@@ -58,6 +59,15 @@ class Player extends Component {
             playing: player.playing,
             duration: this.audio.current.duration(),
           })
+        };
+      case 'ON_END':
+        return event => {
+          this.setState({
+            ready: false,
+            playing: false,
+            current: false,
+          });
+          dispatch({ type: 'PLAYER:STOP' });
         };
       case 'TOGGLE_PLAY':
         return event => {
@@ -98,12 +108,12 @@ class Player extends Component {
   render() {
     const { player } = this.props;
     const { title, subtitle, art, src } = player;
-    const { ready, playing, volume, progress, duration } = this.state;
+    const { ready, playing, current, volume, progress, duration } = this.state;
     const time = moment.utc(progress * 1000).format("mm:ss") + ' / ' + moment.utc(duration * 1000).format("mm:ss");
-    if (!src) return null;
+    if (!src || !current) return null;
     return (
       <div className={`Player bg-warning shadow${playing ? ' sticky-top' : ''}`}>
-        <ReactHowler src={src} playing={playing} ref={this.audio} onLoad={this.handleEvent('ON_LOAD')} />
+        <ReactHowler src={src} playing={playing} ref={this.audio} onLoad={this.handleEvent('ON_LOAD')} onEnd={this.handleEvent('ON_END')} />
         <div className="container-fluid">
           <div className="row player-display">
             <div className="col-sm-1">

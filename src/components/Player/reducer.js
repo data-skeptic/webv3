@@ -1,4 +1,5 @@
 const initialState = {
+  playing: false,
   src: false,
   art: 'https://s3.amazonaws.com/dataskeptic.com/img/primary-logo-400.jpg',
   title: 'Detecting Fast Radio Bursts with Deep Learning',
@@ -29,6 +30,9 @@ const PlayerReducer = (nextState = initialState, action) => {
       break;
     case 'PLAYER:PAUSE':
       state.playing = false;
+      break;
+    case 'PLAYER:STOP':
+      state = initialState;
       break;
     default:
       break;
