@@ -18,7 +18,7 @@ class ChatBot extends Component {
       bot_id: props.bot_id || "globally_not_found_bot",
       initial_dialog_id: props.dialog_id || undefined, // If not present, let the Bot pick
     };
-    var new_username = 'random + ip + get time'
+    var new_username = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5); + '_' + d.getTime().toString()
     this.session = JSON.parse(sessionStorage.getItem('CHATBOT') || JSON.stringify({ username: new_username }));
     this.state['username'] = this.session['username']
     this.chat = React.createRef();
