@@ -32,6 +32,8 @@ class Blog extends Component {
     const blogs = api.blogs || {};
     const category_blogs = blogs[category] || [];
     const post = blogs[category] && blogs[category][year] && blogs[category][year][name] ? blogs[category][year][name] : undefined;
+    var bot_id = "f06d0f04-02a2-560d-9c0c-2220f96ec56f"
+    var dialog_id = "f6f416ab-11bc-a81f-b3c7-9d90ab31385a"
     return (
       <React.Fragment>
         <main id="Blog" className="container">
@@ -45,7 +47,7 @@ class Blog extends Component {
             )}
           </Loading>
         </main>
-        <BubbleBot />
+        <BubbleBot bot_id={bot_id} initial_dialog_id={dialog_id} />
       </React.Fragment>
     );
   }

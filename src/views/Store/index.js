@@ -8,6 +8,8 @@ import './styles.scss';
 import Navbar from 'Components/Navbar';
 import Footer from 'Components/Footer';
 
+import BubbleBot from 'Components/BubbleBot';
+
 class Store extends Component {
   constructor(props) {
     super(props);
@@ -25,12 +27,17 @@ class Store extends Component {
     }
   }
   render() {
+    var bot_id = "f06d0f04-02a2-560d-9c0c-2220f96ec56f"
+    var dialog_id = "7ede72f6-a400-6f5b-1b16-51367bdf2b87"
     return (
-      <main className="container">
-        <h2>Store</h2>
-        <p>We've temporarily taken our store offline while we migrate to our new backend.
-        Please check back in 2019 for new t-shirt designs and our hex stickers.</p>
-      </main>
+      <React.Fragment>
+        <main className="container">
+          <h2>Store</h2>
+          <p>We've temporarily taken our store offline while we migrate to our new backend.
+          Please check back in 2019 for new t-shirt designs and our hex stickers.</p>
+        </main>
+        <BubbleBot bot_id={bot_id} initial_dialog_id={dialog_id} />
+      </React.Fragment>
     );
   }
 }
