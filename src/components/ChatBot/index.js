@@ -15,17 +15,19 @@ class ChatBot extends Component {
       typing: 0,
       awaiting_response: false,
       bot: {},
-      username: 'Guest',
-      bot_id: props.bot_id || 'f06d0f04-02a2-560d-9c0c-2220f96ec56f',
+      bot_id: props.bot_id || "globally_not_found_bot",
+      initial_dialog_id: props.dialog_id || undefined, // If not present, let the Bot pick
     };
+    var new_username = 'random + ip + get time'
+    this.session = JSON.parse(sessionStorage.getItem('CHATBOT') || JSON.stringify({ username: new_username }));
+    this.state['username'] = this.session['username']
     this.chat = React.createRef();
     this.footer = React.createRef();
   }
   componentDidMount() {
     const { dispatch, api, status } = this.props;
-    const { username, bot_id } = this.state;
-    let session = JSON.parse(sessionStorage.getItem('CHATBOT') || '{}');
-
+    const { username, bot_id, initial_dialog_id } = this.state;
+    
     dispatch({ type: 'STATUS:LOADING', payload: 'skeptic_bot' });
     this.io = Skeptic.Client({
       connect: process.env.BOT_SERVICE_API_URI,
@@ -37,9 +39,9 @@ class ChatBot extends Component {
               case 'set':
                 this.setState(message.set);
                 Object.keys(message.set).map(key => {
-                  session[key] = message.set[key];
+                  this.session[key] = message.set[key];
                 });
-                sessionStorage.setItem('CHATBOT', JSON.stringify(session));
+                sessionStorage.setItem('CHATBOT', JSON.stringify(this.session));
                 break;
               default:
                 break;
@@ -58,7 +60,7 @@ class ChatBot extends Component {
         }
       }
     });
-    const user_id = session.user_id || null;
+    const user_id = this.session.user_id || null;
     this.setState({ user_id });
     this.handleEvent('GREET_BOT')();
     dispatch({ type: 'STATUS:LOADED', payload: 'skeptic_bot' });
@@ -71,13 +73,13 @@ class ChatBot extends Component {
   }
   handleEvent(event_name, event_data = {}) {
     const { api, status, dispatch } = this.props;
-    const { open, bot_id, username, user_id, input } = this.state;
+    const { open, bot_id, initial_dialog_id, username, user_id, input } = this.state;
     let state = Object.assign({}, this.state);
     switch (event_name) {
       case 'GREET_BOT':
         return () => {
           if (status.loading.includes('skeptic_bot')) return setTimeout(this.handleEvent('GREET_BOT'), 1000);
-          this.io.emit('CONNECTION', { bot_id: bot_id, username: username, user_id: user_id });
+          this.io.emit('CONNECTION', { bot_id, dialog_id: initial_dialog_id, username, user_id });
         };
 	    case 'RENDER_MESSAGE':
         return (message) => {

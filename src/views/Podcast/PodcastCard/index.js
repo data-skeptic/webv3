@@ -54,6 +54,7 @@ class PodcastCard extends Component {
     let date = moment(publish_date, "YYYYMMDD").fromNow();
     if (date.includes('month')) date = moment(publish_date).format("MMMM Do YYYY");
     console.log(post)
+    // TODO post.type == "mp3"
     return (
       <article className="PodcastCard row">
         <Loading on={this.state.loaded && podcasts[blog_id]}>

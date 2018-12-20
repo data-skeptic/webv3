@@ -24,6 +24,8 @@ class Missing extends Component {
     }
   }
   render() {
+    var bot_id = "f06d0f04-02a2-560d-9c0c-2220f96ec56f"
+    var initial_dialog_id = "18a5cb19-7c2f-bdc8-3fc3-81532d39f162"
     return (
       <React.Fragment>
         <main id="Missing" className="container">
@@ -37,7 +39,7 @@ class Missing extends Component {
             </div>
           </div>
         </main>
-        <BubbleBot open />
+        <BubbleBot open bot_id={bot_id} initial_dialog_id={initial_dialog_id} />
       </React.Fragment>
     );
   }
