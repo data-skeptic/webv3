@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import './styles.scss';
 
 import Loading from 'Components/Loading';
+import Button from 'Components/Button';
 
 class BlogPost extends Component {
   constructor(props) {
@@ -42,7 +44,6 @@ class BlogPost extends Component {
     const people = related.filter(item => item.type === 'person');
     const images = related.filter(item => item.type === 'homepage-image');
     const audio = related.filter(item => item.type === 'mp3');
-    console.log({people, images, audio});
     return (
       <Loading on={status.loaded.includes(`GET_BLOG_${blog_id}`)}>
         {audio.length > 0 && audio.map((file_data, f) => {
@@ -52,9 +53,18 @@ class BlogPost extends Component {
             src: file_data.dest,
             art: images[0] ? images[0].dest : undefined,
           };
+          const date = moment(post.publish_date).format("MMMM Do YYYY");
           return (
-            <aside className="BlogAudio alert alert-info" key={f}>
-              <button className="btn btn-lg btn-success" onClick={this.handleEvent('ON_CLICK', { name: 'play_button', ...audio_bundle })}><i className="fa fa-play" /></button>
+            <aside className="BlogAudio alert alert-warning" key={f}>
+              <div className="row mb-0">
+                <div className="col-sm-9">
+                  {people[0] && <img className="speaker" src={people[0].dest} title={people[0].title} />}
+                  <h5 className="d-inline-block mb-0">{file_data.title}<small className="d-block font-italic">{date}</small></h5>
+                </div>
+                <div className="col-sm-3 text-right">
+                  <Button className="btn-lg" icon="fa fa-play" onClick={this.handleEvent('ON_CLICK', { name: 'play_button', ...audio_bundle })}>Play</Button>
+                </div>
+              </div>
             </aside>
           );
         })}

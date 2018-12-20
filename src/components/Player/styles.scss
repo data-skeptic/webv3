@@ -1,7 +1,3 @@
-$thumbColor:#343a40;
-$thumbFocusColor:#ffc107;
-$trackColor:rgba(0,0,0,0.15);
-
 .Player{
   width:100%;min-height:75px;padding:.75rem 1.25rem;margin-bottom:1rem;
   input,
@@ -24,13 +20,3 @@ $trackColor:rgba(0,0,0,0.15);
   .Loading{padding:0;}
 }
 nav+.Player{margin-top:-1rem;}
-input[type="range"]{
-  &::-webkit-slider-thumb{background:$thumbColor;}
-  &::-moz-range-thumb{background:$thumbColor;}
-  &::-ms-thumb{background:$thumbColor;}
-  &:focus::-webkit-slider-thumb{background:$thumbFocusColor;}
-  &:focus::-ms-thumb{background:$thumbFocusColor;}
-  &::-webkit-slider-runnable-track{background:$trackColor;}
-  &::-moz-range-track{background:$trackColor;}
-  &::-ms-track{background:$trackColor;}
-}

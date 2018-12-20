@@ -1,2 +1,18 @@
+// Miscellaneous
 .no-gutter{padding-left:0!important;padding-right:0!important;}
 .open-gutter{margin-left:-15px!important;margin-right:-15px!important;}
+.btn.rounded{border-radius:25rem!important;}
+// Range Slider
+$RangeSliderThumbColor:#343a40;
+$RangeSliderThumbFocusColor:#ffc107;
+$RangeSliderTrackColor:rgba(0,0,0,0.15);
+input[type="range"]{
+  &::-webkit-slider-thumb{background:$RangeSliderThumbColor;}
+  &::-moz-range-thumb{background:$RangeSliderThumbColor;}
+  &::-ms-thumb{background:$RangeSliderThumbColor;}
+  &:focus::-webkit-slider-thumb{background:$RangeSliderThumbFocusColor;}
+  &:focus::-ms-thumb{background:$RangeSliderThumbFocusColor;}
+  &::-webkit-slider-runnable-track{background:$RangeSliderTrackColor;}
+  &::-moz-range-track{background:$RangeSliderTrackColor;}
+  &::-ms-track{background:$RangeSliderTrackColor;}
+}
