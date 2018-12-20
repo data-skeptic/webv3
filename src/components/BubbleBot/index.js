@@ -9,6 +9,8 @@ class BubbleBot extends Component {
     super(props);
     this.state = {
       open: props.open || false,
+      bot_id: props.bot_id,
+      initial_dialog_id: props.initial_dialog_id
     };
   }
   componentDidMount() {
@@ -38,11 +40,11 @@ class BubbleBot extends Component {
   }
   render() {
     const { style } = this.props;
-    const { open } = this.state;
+    const { open, bot_id, initial_dialog_id } = this.state;
     return (
       <div className={`BubbleBot${open ? ' open' : ''}`} style={style || {}}>
         <div className="bubble" onClick={this.handleEvent('ON_CLICK', { name: 'bubble' })}></div>
-        <ChatBot bot_id="18a5cb19-7c2f-bdc8-3fc3-81532d39f162" />
+        <ChatBot bot_id={bot_id} initial_dialog_id={initial_dialog_id} />
       </div>
     );
   }

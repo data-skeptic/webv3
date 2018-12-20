@@ -33,11 +33,12 @@ class Home extends Component {
     const { blogs } = api || {};
     const sorted_blogs = Object.values(blogs || {}).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
     const { log } = this.state;
+    var bot_id = "f06d0f04-02a2-560d-9c0c-2220f96ec56f"
     return (
       <main className="Home container">
         <div className="row">
           <div className="col-xs-12 col-sm-6">
-            <ChatBot />
+            <ChatBot bot_id={bot_id} />
           </div>
         </div>
       </main>
