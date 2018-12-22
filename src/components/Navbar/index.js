@@ -33,6 +33,10 @@ const Navbar = props => {
             ))}
           </ul>
           <ul className="navbar-nav mr-sm-2">
+            {
+                // Temporarily disabling while we get Amplify working
+                <div></div>
+            /*
             {(!account || !account.email) && (
               <li className={`nav-item${props.active === 'Login' ? ' active' : ''}`}>
                 <Link className="nav-link" to="/login">Login</Link>
@@ -46,6 +50,8 @@ const Navbar = props => {
                 </div>
               </li>
             )}
+            */
+            }
           </ul>
         </div>
       </div>
