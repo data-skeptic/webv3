@@ -29,7 +29,6 @@ class SingleSelect extends Component {
   onSelect(selected, message) {
     const { onSelect } = this.props;
     return () => {
-      console.log(selected);
       this.setState({ selected });
       onSelect(message);
     };
