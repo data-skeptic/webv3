@@ -7,7 +7,7 @@
     input{width:70%;}
     label{margin-left:5%;width:25%;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
   }
-  .player-control{border-radius:50%!important;}
+  .player-control{cursor:pointer;border-radius:50%!important;}
   .player-art{float:left;max-width:65px;max-height:65px;margin:-7.5px 15px -7.5px 0;}
   .player-info{
     line-height:1.5rem;vertical-align:middle;
@@ -17,6 +17,6 @@
   .player-empty{
     p{line-height:43px;margin:0;}
   }
-  .Loading{padding:0;}
+  .Loading{display:inline-block;padding:0;}
 }
 nav+.Player{margin-top:-1rem;}

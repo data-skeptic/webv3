@@ -69,6 +69,10 @@ class Player extends Component {
           });
           dispatch({ type: 'PLAYER:STOP' });
         };
+      case 'STOP_PLAYER':
+        return event => {
+          dispatch({ type: 'PLAYER:STOP' });
+        };
       case 'TOGGLE_PLAY':
         return event => {
           var state = Object.assign({}, this.state);
@@ -139,6 +143,7 @@ class Player extends Component {
               <Loading on={ready}>
                 <button className={`player-control btn btn-dark btn-lg${!src ? ' disabled' : ''}`} onClick={this.handleEvent('TOGGLE_PLAY')} disabled={!src}><i className={`fa fa-${!playing ? 'play' : 'pause'}`} /></button>
               </Loading>
+              <a className={`player-control pull-right`} onClick={this.handleEvent('STOP_PLAYER')}><i className={`fa fa-times`} /></a>
             </div>
           </div>
         </div>
