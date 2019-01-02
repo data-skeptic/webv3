@@ -52,7 +52,6 @@ class ChatBot extends Component {
         },
         'BOT': message => {
           console.log('Skeptic-Chat[Client]:BOT', message);
-          this.setState({ new_message: message });
           this.handleEvent('RENDER_MESSAGE', message.source)(message);
         },
         'USER': message => {
@@ -71,8 +70,8 @@ class ChatBot extends Component {
     this.interval = setInterval(() => {
       const { typing, new_message } = this.state;
       const now = new Date().getTime();
-      this.setState({ typing: this.state.typing < 3 ? this.state.typing + 1 : 0 });
-      if (this.state.new_message) {
+      this.setState({ typing: typing < 3 ? typing + 1 : 0 });
+      if (new_message && new_message.timestamp <= now - 100) {
         this.chat.current.scrollTop = this.chat.current.scrollHeight;
         this.setState({ new_message: false });
       }
@@ -111,6 +110,7 @@ class ChatBot extends Component {
               let timestamp = new Date().getTime();
               let message_delay = (Math.floor(Math.random() * delay.delay_after_newline.max_delay_ms) + delay.delay_after_newline.min_delay_ms);
               message.timestamp = timestamp + message_delay;
+              this.setState({ new_message: message });
               switch(type) {
                 case 'single-select':
                   message.render.push(<Message.SingleSelect options={utterance[type]} onSelect={this.handleEvent('ON_SEND')} index={i} key={i} />);
@@ -160,7 +160,8 @@ class ChatBot extends Component {
         return message => {
           message = message || input;
           if (message.target) message = message.target.value || input;
-          this.setState({ input: '', awaiting_response: true });
+          const now = new Date().getTime();
+          this.setState({ input: '', awaiting_response: true, new_message: { timestamp: now } });
           this.io.emit('USER', {source: username, bot_id, text: message});
           // message = { res: [{ text: message }], source: this.username };
           // this.handleEvent('RENDER_MESSAGE', this.username)(message);
