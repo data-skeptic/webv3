@@ -10,6 +10,7 @@ $arrowColor: #f7f7f7;
   .bubble:active,
   .bubble:focus{transform:scale(1.15);}
   .ChatBot{position:absolute;width:400px;height:500px;bottom:125px;right:25px;border-radius:8px;pointer-events:all;box-shadow:2px 2px 8px 2px rgba(0,0,0,.15);transform-origin:90% 100%;transform:scale(0);transition:0.25s ease-out;}
+  .close-btn{position:absolute;top:0px;right:20px;border-radius:50%;font-size:1.5rem;line-height:1.5rem;cursor:pointer;}
   &.open {
     .bubble{transform:scale(1.15) rotate(25deg);}
     .ChatBot{transform:scale(1);}

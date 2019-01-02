@@ -28,6 +28,8 @@ class BubbleBot extends Component {
             case 'bubble':
               this.setState({ open: !open });
               break;
+            case 'close':
+              this.setState({ open: false });
             default:
               break;
           }
@@ -44,7 +46,9 @@ class BubbleBot extends Component {
     return (
       <div className={`BubbleBot${open ? ' open' : ''}`} style={style || {}}>
         <div className="bubble" onClick={this.handleEvent('ON_CLICK', { name: 'bubble' })}></div>
-        <ChatBot bot_id={bot_id} initial_dialog_id={initial_dialog_id} />
+        <ChatBot bot_id={bot_id} initial_dialog_id={initial_dialog_id}>
+          <a className="close-btn" onClick={this.handleEvent('ON_CLICK', { name: 'close' })}><i className="fa fa-times-circle" /></a>
+        </ChatBot>
       </div>
     );
   }

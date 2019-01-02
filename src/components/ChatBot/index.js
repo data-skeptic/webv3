@@ -189,7 +189,7 @@ class ChatBot extends Component {
     }
   }
   render() {
-    const { style } = this.props;
+    const { style, children } = this.props;
     const { bot, username, typing, input, awaiting_response, log } = this.state;
     const now = new Date().getTime();
     return (
@@ -215,6 +215,7 @@ class ChatBot extends Component {
             </div>
           </div>
         </div>
+        {children}
       </div>
     );
   }
