@@ -19,14 +19,31 @@ const Text = props => {
   )
 }
 
-const SingleSelect = props => {
-  const onSelect = props.onSelect || (() => {})
-  return (
-    <div className="sc-select" key={props.index}>
-      {props.source && <small className="sc-source-name">{props.source}</small>}
-      {props.options.map((option, i) => <button className="btn btn-default" key={i} onClick={onSelect.bind(this, option)}>{option}</button>)}
-    </div>
-  )
+class SingleSelect extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: false,
+    };
+  }
+  onSelect(selected, message) {
+    const { onSelect } = this.props;
+    return () => {
+      console.log(selected);
+      this.setState({ selected });
+      onSelect(message);
+    };
+  }
+  render() {
+    const { source, options, index } = this.props;
+    const { selected } = this.state;
+    return (
+      <div className="sc-select" key={index}>
+        {source && <small className="sc-source-name">{source}</small>}
+        {options.map((option, o) => <button className={`btn btn-${selected === false || selected === o ? 'warning' : 'default'}`} disabled={selected !== false} key={o} onClick={this.onSelect(o, option)}>{option}</button>)}
+      </div>
+    );
+  }
 }
 
 const Image = props => {

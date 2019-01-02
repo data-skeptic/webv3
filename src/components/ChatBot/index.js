@@ -17,6 +17,7 @@ class ChatBot extends Component {
       bot: {},
       bot_id: props.bot_id || "globally_not_found_bot",
       initial_dialog_id: props.dialog_id || undefined, // If not present, let the Bot pick
+      new_message: false,
     };
     var d = new Date()
     var new_username = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5) + '_' + d.getTime()
@@ -51,12 +52,14 @@ class ChatBot extends Component {
         },
         'BOT': message => {
           console.log('Skeptic-Chat[Client]:BOT', message);
+          this.setState({ new_message: message });
           this.handleEvent('RENDER_MESSAGE', message.source)(message);
         },
         'USER': message => {
           console.log('Skeptic-Chat[Client]:USER', message);
           if (message.source === username) this.setState({ awaiting_response: false });
           if (message.source !== username) message.show = true;
+          this.setState({ new_message: message });
           this.handleEvent('RENDER_MESSAGE', message.source)(message);
         }
       }
@@ -66,7 +69,13 @@ class ChatBot extends Component {
     this.handleEvent('GREET_BOT')();
     dispatch({ type: 'STATUS:LOADED', payload: 'skeptic_bot' });
     this.interval = setInterval(() => {
+      const { typing, new_message } = this.state;
+      const now = new Date().getTime();
       this.setState({ typing: this.state.typing < 3 ? this.state.typing + 1 : 0 });
+      if (this.state.new_message) {
+        this.chat.current.scrollTop = this.chat.current.scrollHeight;
+        this.setState({ new_message: false });
+      }
     }, 750);
   }
   componentWillUnmount() {
@@ -74,7 +83,7 @@ class ChatBot extends Component {
   }
   handleEvent(event_name, event_data = {}) {
     const { api, status, dispatch } = this.props;
-    const { open, bot_id, initial_dialog_id, username, user_id, input } = this.state;
+    const { bot_id, initial_dialog_id, username, user_id, input } = this.state;
     let state = Object.assign({}, this.state);
     switch (event_name) {
       case 'GREET_BOT':
@@ -145,11 +154,7 @@ class ChatBot extends Component {
             }
           });
           state.log.push(message);
-          if (open) this.chat.current.scrollTop = this.chat.current.scrollHeight;
           this.setState(state);
-          setTimeout(() => {
-            if (open) this.chat.current.scrollTop = this.chat.current.scrollHeight;
-          }, 500);
         };
       case 'ON_SEND':
         return message => {
@@ -187,8 +192,8 @@ class ChatBot extends Component {
     const { bot, username, typing, input, awaiting_response, log } = this.state;
     const now = new Date().getTime();
     return (
-      <div className="ChatBot card" style={style} ref={this.chat}>
-        <div className="card-body">
+      <div className="ChatBot card" style={style}>
+        <div className="card-body" ref={this.chat}>
           <h5 className="card-title">{bot.name}</h5>
           {log.map((msg, i) => {
             msg.timestamp = msg.timestamp || now;

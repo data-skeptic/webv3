@@ -12,5 +12,11 @@
   .sc-message.incoming+.sc-message.outgoing,
   .sc-message.outgoing+.sc-message.incoming{margin-top:0.5rem;}
   .sc-message.incoming+.sc-message.incoming,
-  .sc-message.outgoing+.sc-message.outgoing{margin-top:0.25rem;}
+  .sc-message.outgoing+.sc-message.outgoing,
+  .sc-bubble+.sc-bubble{margin-top:0.25rem;}
+
+  .sc-select{
+    text-align:center;margin:0.5rem 0;
+    >button+button{margin:0.25rem 0.25rem;}
+  }
 }
