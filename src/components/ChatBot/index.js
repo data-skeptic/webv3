@@ -16,7 +16,7 @@ class ChatBot extends Component {
       awaiting_response: false,
       bot: {},
       bot_id: props.bot_id || "globally_not_found_bot",
-      initial_dialog_id: props.dialog_id || undefined, // If not present, let the Bot pick
+      initial_dialog_id: props.initial_dialog_id || undefined, // If not present, let the Bot pick
     };
     var d = new Date()
     var new_username = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5) + '_' + d.getTime()
