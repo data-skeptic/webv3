@@ -25,8 +25,11 @@ function withAnalytics(WrappedComponent) {
       super(props);
     }
     componentDidMount() {
+      const is_development = (!process || !process.env || !process.env.NODE_ENV) || process.env.NODE_ENV === 'development';
       const { location } = this.props;
-      if (location) analytics.pageview(location.pathname);
+      if (is_development) {
+        console.info('ANALYTICS:VIEW', 'Development - Skipping Google Analytics page view.');
+      } else if (location) analytics.pageview(location.pathname);
     }
     render() {
       return <WrappedComponent {...this.props} />;
