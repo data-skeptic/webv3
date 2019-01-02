@@ -56,14 +56,14 @@ const Image = props => {
 }
 
 const Markdown = props => {
-  const url = props.url || '#'
+  const { message, source, timestamp } = props;
   return (
     <div className="sc-bubble sc-markdown">
-      {props.source && <small className="sc-source-name">{props.source}</small>}
+      {source && <small className="sc-source-name">{source}</small>}
       <div className="sc-bubble-content">
-        <ReactMarkdown source={props.message} />
+        <ReactMarkdown source={message} />
       </div>
-      {props.timestamp && <small className="sc-timestamp"><em>{props.timestamp}</em></small>}
+      {timestamp && <small className="sc-timestamp"><em>{timestamp}</em></small>}
     </div>
   );
 };
