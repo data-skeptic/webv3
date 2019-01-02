@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Skeptic from 'Components/skeptic-chat';
 import Message from './Message';
 
+import Error from 'Components/Error';
+
 import './styles.scss';
 
 class ChatBot extends Component {
@@ -79,6 +81,9 @@ class ChatBot extends Component {
   }
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+  componentDidCatch(error, info) {
+    this.setState({ error, info });
   }
   handleEvent(event_name, event_data = {}) {
     const { api, status, dispatch } = this.props;
@@ -190,32 +195,40 @@ class ChatBot extends Component {
   }
   render() {
     const { style, children } = this.props;
-    const { bot, username, typing, input, awaiting_response, log } = this.state;
+    const { bot, username, typing, input, awaiting_response, log, error, info } = this.state;
     const now = new Date().getTime();
     return (
       <div className="ChatBot card" style={style}>
-        <div className="card-body" ref={this.chat}>
-          <h5 className="card-title">{bot.name}</h5>
-          {log.map((msg, i) => {
-            msg.timestamp = msg.timestamp || now;
-            if (msg.timestamp <= now || msg.source === username) return <Skeptic.Message type={msg.source === username ? 'outgoing' : `incoming${msg.show ? ' user' : ''}`} key={i}>{msg.render}</Skeptic.Message>;
-            return <TypingEllipses type={msg.source === username ? 'outgoing' : 'incoming'} key={`${i}_2`} count={typing} />;
-          })}
-          {(awaiting_response || input !== '') && <TypingEllipses type="outgoing" count={typing} />}
-        </div>
-        <div className="card-footer" ref={this.footer}>
-          <div className="input-group">
-            <input className="form-control"
-              onChange={this.handleEvent('ON_CHANGE')}
-              onKeyDown={this.handleEvent('ON_KEYDOWN')}
-              value={input}
-            />
-            <div className="input-group-append">
-              <button className="btn btn-primary" onClick={this.handleEvent('ON_SEND')}><i className="fa fa-paper-plane" /></button>
-            </div>
+        {error && (
+          <div className="card-body">
+            <Error error={error} info={info} />
           </div>
-        </div>
-        {children}
+        ) || (
+          <React.Fragment>
+            <div className="card-body" ref={this.chat}>
+              <h5 className="card-title">{bot.name}</h5>
+              {log.map((msg, i) => {
+                msg.timestamp = msg.timestamp || now;
+                if (msg.timestamp <= now || msg.source === username) return <Skeptic.Message type={msg.source === username ? 'outgoing' : `incoming${msg.show ? ' user' : ''}`} key={i}>{msg.render}</Skeptic.Message>;
+                return <TypingEllipses type={msg.source === username ? 'outgoing' : 'incoming'} key={`${i}_2`} count={typing} />;
+              })}
+              {(awaiting_response || input !== '') && <TypingEllipses type="outgoing" count={typing} />}
+            </div>
+            <div className="card-footer" ref={this.footer}>
+              <div className="input-group">
+                <input className="form-control"
+                  onChange={this.handleEvent('ON_CHANGE')}
+                  onKeyDown={this.handleEvent('ON_KEYDOWN')}
+                  value={input}
+                />
+                <div className="input-group-append">
+                  <button className="btn btn-primary" onClick={this.handleEvent('ON_SEND')}><i className="fa fa-paper-plane" /></button>
+                </div>
+              </div>
+            </div>
+            {children}
+          </React.Fragment>
+        )}
       </div>
     );
   }
