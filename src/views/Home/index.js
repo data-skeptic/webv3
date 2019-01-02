@@ -36,6 +36,8 @@ class Home extends Component {
     const { log } = this.state;
     const podcast_page = "/blog/episodes/2018/drug-discovery-with-machine-learning"
     var bot_id = "f06d0f04-02a2-560d-9c0c-2220f96ec56f"
+    var blog = blogs[0]
+    console.log({blog})
     return (
       <main className="Home container">
         <div className="row">
@@ -47,10 +49,8 @@ class Home extends Component {
           <div className="col-xs-12 col-sm-5">
             <ChatBot bot_id={bot_id} />
           </div>
-          <div id="homepage-player" className="col-xs-12 col-sm-3">
-            <div className="homepage-player-title"><Link to={podcast_page}>Title</Link></div>
-            <div className="homepage-player-desc">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description </div>
-            <button className="homepage-player-button">Play</button>
+          <div className="col-xs-12 col-sm-3">
+            <HomepagePlayer blog={blog} />
           </div>
         </div>
       </main>
