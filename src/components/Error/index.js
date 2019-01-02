@@ -26,7 +26,7 @@ class Error extends Component {
     const message = JSON.stringify(error.message);
     return (
       <div className={`Error ${className || ''}`} style={style || {}}>
-        {!process.env.SHOW_ERRORS && (
+        {process.env.SHOW_ERRORS && (
           <div className="ErrorContent col-xs-12">
             <h3>{name}: {message}</h3>
             <ReactJson src={info} name={'Details'} displayDataTypes={false} enableClipboard={false} />
