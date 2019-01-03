@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css';
 import './styles.scss';
 
+import PodcastPost from './PodcastPost';
 import PodcastCard from './PodcastCard';
-import BlogCard from '../Blog/BlogCard';
-
 import Loading from 'Components/Loading';
-
-import Navbar from 'Components/Navbar';
-import Footer from 'Components/Footer';
 
 class Podcast extends Component {
   constructor(props) {
@@ -31,18 +25,20 @@ class Podcast extends Component {
   }
   render() {
     const { api, status } = this.props || {};
-    const { podcasts } = api || {};
-    const blogs = podcasts
-    const { blog_id } = this.props.match.params;
-    const sorted_blogs = Object.values(blogs || {}).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
+    let { category, year, name } = this.props.match.params;
+    category = category || 'all';
+    const podcasts = api.podcasts || {};
+    const category_podcasts = podcasts[category] || [];
+    const post = podcasts[category] && podcasts[category][year] && podcasts[category][year][name] ? podcasts[category][year][name] : undefined;
+    console.log({podcasts, category, year, name, post});
     return (
       <main id="Podcast" className="container">
         <Loading on={status.ready}>
-          {blog_id && (
-            <BlogPost post={blogs[blog_id]} />
+          {post && (
+            <PodcastPost post={post} />
           ) || (
             <React.Fragment>
-              {sorted_blogs.map((blog, b) => <PodcastCard post={blog} key={b} />)}
+              {category_podcasts.map((podcast, p) => <PodcastCard post={podcast} key={p} />)}
             </React.Fragment>
           )}
         </Loading>

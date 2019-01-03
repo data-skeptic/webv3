@@ -43,8 +43,8 @@ class BlogCard extends Component {
     }
   }
   render() {
-    const { api, post } = this.props;
-    const { blog_id, prettyname, title, abstract, publish_date } = post;
+    const { post } = this.props;
+    const { prettyname, title, abstract, publish_date } = post;
     let date = moment(publish_date, "YYYYMMDD").fromNow();
     if (date.includes('month')) date = moment(publish_date).format("MMMM Do YYYY");
     return (

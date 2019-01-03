@@ -7,14 +7,14 @@ import './styles.scss';
 import Loading from 'Components/Loading';
 import Button from 'Components/Button';
 
-class BlogPost extends Component {
+class PodcastPost extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   componentDidMount() {
     const { post, dispatch } = this.props;
-    dispatch({ type: 'API:GET_BLOG', payload: { post }});
+    dispatch({ type: 'API:GET_PODCAST', payload: { post }});
   }
   handleEvent(event_name, event_data = {}) {
     const { dispatch } = this.props;
@@ -44,7 +44,7 @@ class BlogPost extends Component {
     const images = related.filter(item => item.type === 'homepage-image');
     const audio = related.filter(item => item.type === 'mp3');
     return (
-      <Loading on={status.loaded.includes(`GET_BLOG_${blog_id}`)}>
+      <Loading on={status.loaded.includes(`GET_PODCAST_${blog_id}`)}>
         {audio.length > 0 && audio.map((file_data, f) => {
           const audio_bundle = {
             title: file_data.title,
@@ -54,20 +54,21 @@ class BlogPost extends Component {
           };
           const date = moment(post.publish_date).format("MMMM Do YYYY");
           return (
-            <aside className="BlogAudio alert alert-warning" key={f}>
+            <aside className="PodcastAudio alert alert-warning" key={f}>
               <div className="row mb-0">
-                <div className="col-sm-9">
+                <div className="col-sm-7">
                   {people[0] && <img className="speaker" src={people[0].dest} title={people[0].title} />}
                   <h5 className="d-inline-block mb-0">{file_data.title}<small className="d-block font-italic">{date}</small></h5>
                 </div>
-                <div className="col-sm-3 text-right">
+                <div className="col-sm-5 text-right">
+                  <Button className="btn-lg" icon="fa fa-download" onClick={this.handleEvent('ON_CLICK', { name: 'download_button', ...audio_bundle })}>Download</Button>
                   <Button className="btn-lg" icon="fa fa-play" onClick={this.handleEvent('ON_CLICK', { name: 'play_button', ...audio_bundle })}>Play</Button>
                 </div>
               </div>
             </aside>
           );
         })}
-        <article className="BlogPost" dangerouslySetInnerHTML={{ __html: src }} />
+        <article className="PodcastPost" dangerouslySetInnerHTML={{ __html: src }} />
       </Loading>
     );
   }
@@ -76,4 +77,4 @@ class BlogPost extends Component {
 export default connect(state => ({
   api: state.api,
   status: state.status
-}))(BlogPost);
+}))(PodcastPost);
