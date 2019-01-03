@@ -8,14 +8,18 @@ class BubbleBot extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: props.open || false,
+      open: false,
       bot_id: props.bot_id,
       initial_dialog_id: props.initial_dialog_id
     };
   }
   componentDidMount() {
-    const { dispatch, api, status } = this.props;
-    const { open } = this.state;
+    const { dispatch, api, status, open } = this.props;
+    if (open) {
+      setTimeout(() => {
+        this.setState({ open });
+      }, 1500);
+    }
   }
   handleEvent(event_name, event_data = {}) {
     const { api, status, dispatch } = this.props;
