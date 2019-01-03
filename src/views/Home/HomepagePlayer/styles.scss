@@ -1,0 +1,19 @@
+.homepage-player-title {
+	white-space:nowrap;	
+	overflow-x: hidden;
+	padding-bottom: 10px;
+}
+.homepage-player-desc p {
+	font-size: 10pt;
+  	max-height: 225px;
+	overflow-y: auto;
+}
+.homepage-player-date p {
+	font-size: 8pt;
+}
+.homepage-player-button {
+	background-color: #444;
+	color: #fff;
+	border-radius: 10px;
+	width: 100%;
+}

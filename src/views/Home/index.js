@@ -9,7 +9,9 @@ import Navbar from 'Components/Navbar';
 import Footer from 'Components/Footer';
 import ChatBot from 'Components/ChatBot';
 
+import HomepagePlayer from './HomepagePlayer';
 import BlogCard from 'Views/Blog/BlogCard';
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -31,13 +33,13 @@ class Home extends Component {
   }
   render() {
     const { api, status } = this.props || {};
-    const { blogs } = api || {};
-    const sorted_blogs = Object.values(blogs || {}).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1));
+    const { podcasts } = api || {all: []};
     const { log } = this.state;
-    const podcast_page = "/blog/episodes/2018/drug-discovery-with-machine-learning"
     var bot_id = "f06d0f04-02a2-560d-9c0c-2220f96ec56f"
-    var blog = blogs[0]
-    console.log({blog})
+    var podcast = undefined
+    if (podcasts.all.length > 0) {
+      podcast = podcasts.all[0]
+    }
     return (
       <main className="Home container">
         <div className="row">
@@ -50,7 +52,7 @@ class Home extends Component {
             <ChatBot bot_id={bot_id} />
           </div>
           <div className="col-xs-12 col-sm-3">
-            <HomepagePlayer blog={blog} />
+            <HomepagePlayer podcast={podcast} />
           </div>
         </div>
       </main>
