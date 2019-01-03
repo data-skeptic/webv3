@@ -33,9 +33,10 @@ const Router = () => {
             <Player />
             <Switch>
               <Route exact path="/" component={Views.Home} />
+              <Route path="/podcast/:category/:year/:name" component={Views.Podcast} />
               <Route path="/podcast" component={Views.Podcast} />
-              <Route exact path="/blog" component={Views.Blog} />
               <Route path="/blog/:category/:year/:name" component={Views.Blog} />
+              <Route path="/blog" component={Views.Blog} />
               <Route path="/store" component={Views.Store} />
               <Route path="/membership" component={Views.Membership} />
               <Route path="/corporate" component={Views.Corporate} />

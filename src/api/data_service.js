@@ -69,9 +69,17 @@ const data_service = store => next => action => {
       axios.get(`${DATASKEPTIC_API_URI}/podcast/episodes/list?limit=${limit || 10}&offset=${offset || 0}&prefix=`)
         .then(({ data }) => {
           var { episodes } = data;
-          var podcasts = {};
+          var podcasts = {
+            all: Object.values(episodes).sort((a, b) => ((new Date(a.publish_date)) < (new Date(b.publish_date)) ? 1 : -1)),
+          };
           episodes.map(podcast => {
-            podcasts[podcast.blog_id] = podcast;
+            var path = podcast.prettyname.substr(1,).split('/');
+            podcast.category = path[0];
+            podcast.year = path[1];
+            podcast.name = path[2];
+            podcasts[podcast.category] = podcasts[podcast.category] || {};
+            podcasts[podcast.category][podcast.year] = podcasts[podcast.category][podcast.year] || {};
+            podcasts[podcast.category][podcast.year][podcast.name] = podcast;
           });
           next({ type: 'API:UPDATE', payload: { podcasts } });
           next({ type: 'STATUS:LOADED', payload: 'GET_PODCASTS' });
@@ -80,21 +88,29 @@ const data_service = store => next => action => {
           next({ type: 'STATUS:ERROR', payload: { name: 'GET_PODCASTS', error } });
         });
       break;
-    // case 'API:GET_PODCAST':
-    //   const { post } = data;
-    //   if (status.loaded.includes(`GET_PODCAST_${post.blog_id}`) && !data.refresh) break;
-    //   next({ type: 'STATUS:LOADING', payload: `GET_PODCAST_${post.blog_id}` });
-    //   axios.get(`https://s3.amazonaws.com/dataskeptic.com/${post.src_file}`)
-    //     .then(({ data }) => {
-    //       next({ type: 'API:UPDATE', payload: { podcasts: {
-    //         [podcast.podcast_id]: { src: data }
-    //       } } });
-    //       next({ type: 'STATUS:LOADED', payload: `GET_PODCAST_${post.blog_id}` });
-    //     })
-    //     .catch(error => {
-    //       next({ type: 'STATUS:ERROR', payload: { name: `GET_PODCAST_${post.blog_id}`, error } });
-    //     });
-    //   break;
+    case 'API:GET_PODCAST':
+      var { post } = data;
+      if (status.loaded.includes(`GET_PODCAST_${post.blog_id}`) && !data.refresh) break;
+      next({ type: 'STATUS:LOADING', payload: `GET_PODCAST_${post.blog_id}` });
+      axios.get(`https://s3.amazonaws.com/dataskeptic.com/${post.src_file}`)
+        .then(({ data }) => {
+          next({
+            type: 'API:UPDATE', payload: {
+              podcasts: {
+                [post.category]: {
+                  [post.year]: {
+                    [post.name]: { src: data }
+                  }
+                }
+              }
+            }
+          });
+          next({ type: 'STATUS:LOADED', payload: `GET_PODCAST_${post.blog_id}` });
+        })
+        .catch(error => {
+          next({ type: 'STATUS:ERROR', payload: { name: `GET_PODCAST_${post.blog_id}`, error } });
+        });
+      break;
     default:
       break;
   }
