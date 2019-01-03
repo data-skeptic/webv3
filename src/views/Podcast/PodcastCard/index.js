@@ -39,7 +39,6 @@ class PodcastCard extends Component {
       case 'ON_CLICK':
         return event => {
           const name = event_data.name || event.target.name;
-          const { post } = event_data;
           switch(name) {
             case 'play_button':
               const { title, subtitle, src, art } = event_data;
