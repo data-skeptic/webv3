@@ -10,14 +10,11 @@ const Footer = props => {
       Bot: '/',
       Podcast: '/podcast',
       Blog: '/blog',
-      Store: '/store',
-      Membership: '/membership',
     },
     'Data Skeptic': {
       About: '/about',
       Membership: '/membership',
       Store: '/store',
-      Contact: '/contact'
     },
     Connect: {
       Twitter: 'https://twitter.com/dataskeptic',

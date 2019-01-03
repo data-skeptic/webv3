@@ -1,19 +1,21 @@
 import React from 'react';
 import { analytics } from 'Api';
 
-import Home from './Home';
-import Podcast from './Podcast';
+import About from './About';
 import Blog from './Blog';
-import Store from './Store';
-import Membership from './Membership';
+import Contact from './Contact';
 import Corporate from './Corporate';
+import Home from './Home';
 import Login from './Login';
-
+import Membership from './Membership';
 import Missing from './Missing';
+import Podcast from './Podcast';
 import Problem from './Problem';
+import Store from './Store';
+
 import { withCatch } from 'Components/Error';
 
-const Views = { Home, Podcast, Blog, Store, Membership, Corporate, Login, Missing };
+const Views = { About, Blog, Contact, Corporate, Home, Login, Membership, Missing, Podcast, Problem, Store };
 
 Object.keys(Views).map(name => {
   Views[name] = withCatch(withAnalytics(Views[name]), Problem);

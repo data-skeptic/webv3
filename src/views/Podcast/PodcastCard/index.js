@@ -71,7 +71,6 @@ class PodcastCard extends Component {
       src: audio[0].dest,
       art: images[0] ? images[0].dest : undefined,
     };
-    // TODO podcast.type == "mp3"
     return (
       <article className="PodcastCard row">
         <Loading on={this.state.loaded && post}>

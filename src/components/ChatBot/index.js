@@ -18,7 +18,7 @@ class ChatBot extends Component {
       awaiting_response: false,
       bot: {},
       bot_id: props.bot_id || "globally_not_found_bot",
-      initial_dialog_id: props.dialog_id || undefined, // If not present, let the Bot pick
+      initial_dialog_id: props.initial_dialog_id || undefined, // If not present, let the Bot pick
       new_message: false
     };
     var d = new Date()
