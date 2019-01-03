@@ -31,9 +31,9 @@ class Missing extends Component {
         <main id="Missing" className="container">
           <div className="row">
             <div className="DazedBot col-xs-12 col-sm-3 offset-sm-1">
-              <embed src="https://s3.amazonaws.com/dataskeptic.com/animations/bot/dazed/demo.html" />
+              <embed className="col-sm-12" src="https://s3.amazonaws.com/dataskeptic.com/animations/bot/dazed/demo.html" />
             </div>
-            <div className="MissingContent col-xs-12 col-sm-6">
+            <div className="MissingContent col-xs-12 col-sm-6 text-center text-sm-left">
               <h3>404 - PAGE NOT FOUND</h3>
               <p className="lead">The page you are looking for might have been removed, had its name changed or is temporarily unavailable.</p>
             </div>

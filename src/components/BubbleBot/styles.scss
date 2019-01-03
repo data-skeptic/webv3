@@ -16,3 +16,8 @@ $arrowColor: #f7f7f7;
     .ChatBot{transform:scale(1);}
   }
 }
+@media(max-width:450px) {
+  .BubbleBot{
+    .ChatBot{left:25px;width:calc(100% - 50px);right:25px;}
+  }
+}
