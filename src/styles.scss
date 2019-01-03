@@ -16,3 +16,5 @@ input[type="range"]{
   &::-moz-range-track{background:$RangeSliderTrackColor;}
   &::-ms-track{background:$RangeSliderTrackColor;}
 }
+.react-download-container{display:inline-block;}
+.Button+.react-download-container{margin-left:0.5rem;}

@@ -7,6 +7,7 @@ import './styles.scss';
 
 import Loading from 'Components/Loading';
 import Button from 'Components/Button';
+import Download from '@axetroy/react-download';
 
 class PodcastCard extends Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class PodcastCard extends Component {
             <p className="podcast-date">{date}</p>
             <h5 className="podcast-title"><Link to={`/podcast${prettyname}`}>{title}</Link></h5>
             <Button className="btn-lg" icon="fa fa-play" onClick={this.handleEvent('ON_CLICK', { name: 'play_button', ...audio_bundle })}>Play</Button>
-            <Button className="btn-lg" icon="fa fa-download" onClick={this.handleEvent('ON_CLICK', { name: 'download_button', ...audio_bundle })}>Download</Button>
+            <Download file={audio_bundle.src}><Button className="Button btn btn-dark rounded btn-lg" icon="fa fa-download">Download</Button></Download>
             <p className="podcast-text">{abstract}</p>
             <Link to={`/podcast${prettyname}`} className="btn btn-primary">Read More</Link>
           </div>
