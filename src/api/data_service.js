@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const DATASKEPTIC_API_URI = process.env.DATASKEPTIC_API_URI;
+const { DATASKEPTIC_API_URI } = process.env;
 /*
   Basic Data Service setup.
   Setup as a 'middleware' for Redux, this functions identically to a Reducer, and is given actions
@@ -14,7 +14,8 @@ const DATASKEPTIC_API_URI = process.env.DATASKEPTIC_API_URI;
 const data_service = store => next => action => {
   const { status } = store.getState();
   const data = action.payload || {};
-  next(action)
+  next(action);
+  if (status.loaded.includes(action.type) && !data.refresh) return;
   switch (action.type) {
     case 'API:GET_BLOGS':
       var { limit, offset } = data;
@@ -109,6 +110,21 @@ const data_service = store => next => action => {
         })
         .catch(error => {
           next({ type: 'STATUS:ERROR', payload: { name: `GET_PODCAST_${post.blog_id}`, error } });
+        });
+      break;
+    case 'API:GET_CONTRIBUTORS':
+      next({ type: 'STATUS:LOADING', payload: 'GET_CONTRIBUTORS' });
+      axios.get(`${DATASKEPTIC_API_URI}/blog/contributors/list`)
+        .then(({ data }) => {
+          var contributors = [];
+          Object.keys(data).map(name => {
+            contributors.push({ name, ...data[name] });
+          });
+          next({ type: 'API:UPDATE', payload: { contributors } });
+          next({ type: 'STATUS:LOADED', payload: 'GET_CONTRIBUTORS' });
+        })
+        .catch(error => {
+          next({ type: 'STATUS:ERROR', payload: { name: 'GET_CONTRIBUTORS', error } });
         });
       break;
     default:

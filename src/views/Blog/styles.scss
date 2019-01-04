@@ -1,9 +1,18 @@
 #Blog{
   .row{margin-bottom:1rem;}
+  article{padding-bottom:2rem;}
+  article+article{padding-top:2rem;border-top:1px solid #ccc;}
   .BlogAudio{
     .speaker{
       display:inline-block;max-width:46px;max-height:46px;border:3px solid #fff;border-radius:50%;box-shadow:0 0 8px rgba(0,0,0,0.5);margin-right:1rem;vertical-align:top;transition:0.25s;
       &:hover{transform:scale(1.5);}
+    }
+  }
+  .BlogContributors{
+    .contributor-card{
+      margin:0 auto;margin-bottom:2rem;
+      .card{min-width:calc(200px + 2rem);}
+      .contributor-img{padding:1rem 1rem 0 1rem;}
     }
   }
 }

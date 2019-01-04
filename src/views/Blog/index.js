@@ -16,6 +16,7 @@ class Blog extends Component {
   componentDidMount() {
     const { dispatch, player } = this.props;
     dispatch({ type: 'API:GET_BLOGS' });
+    dispatch({ type: 'API:GET_CONTRIBUTORS' });
   }
   handleEvent(event_name, event_data = {}) {
     switch (event_name) {
