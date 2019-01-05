@@ -12,7 +12,11 @@ let ExposedSettings = {
     DATASKEPTIC_API_URI: `"${process.env.DATASKEPTIC_API_URI || `https://4sevcujref.execute-api.us-east-1.amazonaws.com/prod`}"`,
     BOT_SERVICE_API_URI: `"${process.env.BOT_SERVICE_API_URI || 'https://data-skeptic-bot-service-dev.herokuapp.com'}"`,
     GA_TRACKING_ID: `"${process.env.GA_TRACKING_ID || ''}"`,
-    SHOW_ERRORS: `${process.env.SHOW_ERRORS}`
+    SHOW_ERRORS: `${process.env.SHOW_ERRORS}`,
+    AWS_REGION: `"${process.env.AWS_REGION}"`,
+    AWS_COGNITO_IDENTITY_POOL_ID: `"${process.env.AWS_COGNITO_IDENTITY_POOL_ID}"`,
+    AWS_USER_POOLS_ID: `"${process.env.AWS_USER_POOLS_ID}"`,
+    AWS_USER_POOLS_WEB_CLIENT_ID: `"${process.env.AWS_USER_POOLS_WEB_CLIENT_ID}"`,
   }
 };
 
@@ -82,5 +86,8 @@ module.exports = {
     new ExtractTextPlugin('styles.bundle.css'),
     new OptimizeCssAssetsPlugin(),
     new HtmlWebpackPlugin({ template: './build/index.template.html' }),
+    new webpack.ProvidePlugin({
+      withAuth: [path.join(__dirname, '/src/components/_globals/withAuth'), 'default'],
+    }),
   ]
 };
