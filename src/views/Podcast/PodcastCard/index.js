@@ -69,6 +69,7 @@ class PodcastCard extends Component {
       title: audio[0].title,
       subtitle: audio[0].author || post.author || '',
       src: audio[0].dest,
+      name: audio[0].dest.match(/dataskeptic\/(.*.mp3)/)[1],
       art: images[0] ? images[0].dest : undefined,
     };
     return (
@@ -79,7 +80,7 @@ class PodcastCard extends Component {
             <p className="podcast-date">{date}</p>
             <h5 className="podcast-title"><Link to={`/podcast${prettyname}`}>{title}</Link></h5>
             <Button className="btn-lg" icon="fa fa-play" onClick={this.handleEvent('ON_CLICK', { name: 'play_button', ...audio_bundle })}>Play</Button>
-            <Download file={audio_bundle.src}><Button className="Button btn btn-dark rounded btn-lg" icon="fa fa-download">Download</Button></Download>
+            <a className="Button btn btn-dark rounded btn-lg" href={audio_bundle.src} download={audio_bundle.name}>Download<i className="fa fa-download" /></a>
             <p className="podcast-text">{abstract}</p>
             <Link to={`/podcast${prettyname}`} className="btn btn-primary">Read More</Link>
           </div>

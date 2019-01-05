@@ -48,7 +48,7 @@ class BlogCard extends Component {
     let date = moment(publish_date, "YYYYMMDD").fromNow();
     if (date.includes('month')) date = moment(publish_date).format("MMMM Do YYYY");
     return (
-      <article className="BlogCard col">
+      <aside className="BlogCard col">
         <div className="card">
           <Loading on={this.state.loaded && post}>
             {this.image && <img className="card-img-top" src={this.image.src} alt={title} />}
@@ -63,7 +63,7 @@ class BlogCard extends Component {
             </div>
           </Loading>
         </div>
-      </article>
+      </aside>
     );
   }
 }

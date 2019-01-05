@@ -14,7 +14,8 @@ class BlogPost extends Component {
   }
   componentDidMount() {
     const { post, dispatch } = this.props;
-    dispatch({ type: 'API:GET_BLOG', payload: { post }});
+    dispatch({ type: 'API:GET_BLOG', payload: { post } });
+    dispatch({ type: 'API:GET_CONTRIBUTORS' });
   }
   handleEvent(event_name, event_data = {}) {
     const { dispatch } = this.props;
@@ -39,7 +40,11 @@ class BlogPost extends Component {
   }
   render() {
     const { api, status, post } = this.props;
+    const { contributors } = api;
     const { blog_id, related, src } = post;
+    // TODO: All of this logic should really be done outside of render().
+    const blog_authors = contributors.filter(contributor => post.author.toLowerCase() === contributor.name);
+    const blog_contributors = contributors.filter(contributor => post.contributors.includes(contributor.name));
     const people = related.filter(item => item.type === 'person');
     const images = related.filter(item => item.type === 'homepage-image');
     const audio = related.filter(item => item.type === 'mp3');
@@ -68,6 +73,70 @@ class BlogPost extends Component {
           );
         })}
         <article className="BlogPost" dangerouslySetInnerHTML={{ __html: src }} />
+        {blog_authors.length + blog_contributors.length > 0 && (
+          <article className="BlogContributors">
+            <div className="row">
+              {blog_authors.map((author, a) => (
+                <div className="contributor-card col col-md-6 col-lg-4" key={a}>
+                  <div className="card shadow">
+                    {author.img && (
+                      <div className="contributor-img text-center">
+                        <img className="rounded border" src={author.img} alt={author.prettyname} />
+                      </div>
+                    )}
+                    <div className="card-body">
+                      <h5 className="card-title">{author.prettyname}</h5>
+                      <p className="card-text">{author.bio}</p>
+                    </div>
+                    <div className="card-footer">
+                      <ul className="list-inline row mb-0">
+                        <li class="list-inline-item col text-center"><a className="btn btn-primary shadow rounded" title={`@${author.twitter}`} href={`https://twitter.com/${author.twitter}`}><i className="fa fa-twitter" /></a></li>
+                        <li class="list-inline-item col text-center"><a className="btn btn-primary shadow rounded" title={author.linkedin} href={author.linkedin}><i className="fa fa-linkedin" /></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {blog_contributors.map((author, a) => (
+                <div className="contributor-card col col-md-6 col-lg-4" key={a}>
+                  <div className="card shadow">
+                    {author.img && (
+                      <div className="contributor-img text-center">
+                        <img className="rounded border" src={author.img} alt={author.prettyname} />
+                      </div>
+                    )}
+                    <div className="card-body">
+                      <h5 className="card-title">{author.prettyname}</h5>
+                      <p className="card-text">{author.bio}</p>
+                    </div>
+                    <div className="card-footer">
+                      <ul className="list-inline row mb-0">
+                        <li class="list-inline-item col text-center"><a className="btn btn-primary shadow rounded" title={`@${author.twitter}`} href={`https://twitter.com/${author.twitter}`}><i className="fa fa-twitter" /></a></li>
+                        <li class="list-inline-item col text-center"><a className="btn btn-primary shadow rounded" title={author.linkedin} href={author.linkedin}><i className="fa fa-linkedin" /></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {people.map((author, a) => (
+                <div className="contributor-card col col-md-6 col-lg-4" key={a}>
+                  <div className="card shadow">
+                    {author.dest && (
+                      <div className="contributor-img text-center">
+                        <img className="rounded border" src={author.dest} alt={author.title} />
+                      </div>
+                    )}
+                    <div className="card-body">
+                      <h5 className="card-title">{author.title}</h5>
+                      <p className="card-text">{author.body}</p>
+                    </div>
+                    <div className="card-footer"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </article>
+        )}
       </Loading>
     );
   }
