@@ -3,7 +3,6 @@ import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { ReactGA as analytics } from 'react-ga';
 import api, { data_service } from './api';
 
 import { NotificationsReducer as notifications } from 'Components/Notifications';

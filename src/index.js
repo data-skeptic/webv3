@@ -43,6 +43,7 @@ const Router = () => {
               <Route path="/podcast/:category/:year/:name" component={Views.Podcast} />
               <Route path="/podcast" component={Views.Podcast} />
               <Route path="/store" component={Views.Store} />
+              <Route path="/account" component={Views.Account} />
               <Route component={Views.Missing} />
             </Switch>
             <Footer />

@@ -12,10 +12,11 @@ import Missing from './Missing';
 import Podcast from './Podcast';
 import Problem from './Problem';
 import Store from './Store';
+import Account from './Account';
 
 import { withCatch } from 'Components/Error';
 
-const Views = { About, Blog, Contact, Corporate, Home, Login, Membership, Missing, Podcast, Problem, Store };
+const Views = { About, Blog, Contact, Corporate, Home, Login, Membership, Missing, Podcast, Problem, Store, Account };
 
 Object.keys(Views).map(name => {
   Views[name] = withCatch(withAnalytics(Views[name]), Problem);
